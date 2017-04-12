@@ -25,10 +25,7 @@ public class ClientPublicDaoImpl extends AbstractDao<Integer, ClientPublic> impl
     
     public ClientPublic findById(int id) {
 		ClientPublic client = getByKey(id);
-                if(client!=null){
-			Hibernate.initialize(client.getClient());
-		}
-		
+                
 		return client;
 	}
     public void save(ClientPublic client) {
@@ -47,7 +44,7 @@ public class ClientPublicDaoImpl extends AbstractDao<Integer, ClientPublic> impl
 		
 		
 		for(ClientPublic client : clients){
-			Hibernate.initialize(client.getClient());
+			Hibernate.initialize(client.getCodeville());
 		}
 		return clients;
 	}

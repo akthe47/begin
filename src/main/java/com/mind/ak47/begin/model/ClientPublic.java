@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,41 +28,21 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "client_public")
-public class ClientPublic implements Serializable {
+@PrimaryKeyJoinColumn(name = "code")
+public class ClientPublic extends Client {
 
-    
-    @Id
-    @Column(name = "code")
-    private Integer code;
     
     @NotEmpty
     @Column(name = "nom")
     private String nom;
     
-    @OneToOne(optional = false,fetch = FetchType.LAZY)
-    @JoinTable(name = "client", 
-             joinColumns = { @JoinColumn(name = "code",nullable=false) })
-    private Client client;
+
 
     public ClientPublic() {
     }
 
-    public ClientPublic(Integer code) {
-        this.code = code;
-    }
 
-    public ClientPublic(Integer code, String nom) {
-        this.code = code;
-        this.nom = nom;
-    }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
 
     public String getNom() {
         return nom;
@@ -71,13 +52,6 @@ public class ClientPublic implements Serializable {
         this.nom = nom;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
 
 
     @Override
@@ -87,7 +61,7 @@ public class ClientPublic implements Serializable {
             return false;
         }
         ClientPublic other = (ClientPublic) object;
-        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
+        if ((this.getCode() == null && other.getCode() != null) || (this.getCode() != null && !this.getCode().equals(other.getCode()))) {
             return false;
         }
         return true;
@@ -95,7 +69,7 @@ public class ClientPublic implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.ClientPublic[ code=" + code + " ]";
+        return "com.mind.ak47.begin.model.ClientPublic[ code=" + getCode() + " ]";
     }
     
 }

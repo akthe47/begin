@@ -26,9 +26,7 @@ public class ClientSocieteDaoImpl extends AbstractDao<Integer, ClientSociete> im
     
     public ClientSociete findById(int id) {
 		ClientSociete client = getByKey(id);
-                if(client!=null){
-			Hibernate.initialize(client.getClient());
-		}
+                
 		
 		return client;
 	}
@@ -46,10 +44,10 @@ public class ClientSocieteDaoImpl extends AbstractDao<Integer, ClientSociete> im
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
 		List<ClientSociete> clients = (List<ClientSociete>) criteria.list();
 		
-		
 		for(ClientSociete client : clients){
-			Hibernate.initialize(client.getClient());
+			Hibernate.initialize(client.getCodeville());
 		}
+		
 		return clients;
 	}
     

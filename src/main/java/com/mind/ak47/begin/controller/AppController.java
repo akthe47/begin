@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.mind.ak47.begin.model.User;
 import com.mind.ak47.begin.model.UserProfile;
 import com.mind.ak47.begin.service.ClientPService;
-import com.mind.ak47.begin.service.ClientService;
+//import com.mind.ak47.begin.service.ClientService;
 import com.mind.ak47.begin.service.UserProfileService;
 import com.mind.ak47.begin.service.UserService;
 import org.springframework.context.annotation.ComponentScan;
@@ -47,8 +47,8 @@ public class AppController {
 
 	@Autowired
 	UserService userService;
-        @Autowired
-	ClientService clientService;
+        //@Autowired
+	//ClientService clientService;
          @Autowired
 	ClientPService clientPService;
 	
@@ -79,7 +79,7 @@ public class AppController {
         @RequestMapping(value = { "/listcl" }, method = RequestMethod.GET)
 	public String listClients(ModelMap model) {
                 List<ClientP> clientsp=clientPService.findAllClient();
-		List<Client> clients = clientService.findAllClient();
+		
 		model.addAttribute("cl", clientsp);
 		model.addAttribute("loggedinuser", getPrincipal());
                 model.addAttribute("mess","test");

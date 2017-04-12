@@ -48,12 +48,12 @@
                                                
                                                     <c:forEach items="${cl}" var="client">
                                             <tr>
-						<td>${client.getClient().code}</td>
-                                                <td>${client.getClient().nom} ${client.getClient().prenom}</td>
+						<td>${client.getCode()}</td>
+                                                <td>${client.nom} ${client.prenom}</td>
                                                 <td>${client.cin}</td>
-						<td>${client.getClient().adresse}</td>
-						<td>${client.getClient().mail}</td>
-						<td>${client.getClient().getCodeville().getDescription()}</td>
+						<td>${client.getAdresse()}</td>
+						<td>${client.getMail()}</td>
+						<td>${client.getCodeville().getDescription()}</td>
                                                 <td><button type="button" class="btn btn-success">Consulter</button> <button type="button" class="btn btn-warning">Modifier</button> <button type="button" class="btn btn-danger">Supprimer</button> </td>
                                             </tr>
                                                 </c:forEach>

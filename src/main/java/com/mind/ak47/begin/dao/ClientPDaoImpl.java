@@ -27,10 +27,7 @@ static final Logger logger = LoggerFactory.getLogger(ClientPDaoImpl.class);
     
     public ClientP findById(int id) {
 		ClientP client = getByKey(id);
-                if(client!=null){
-			Hibernate.initialize(client.getClient());
-		}
-		
+                
 		return client;
 	}
     public void save(ClientP client) {
@@ -46,12 +43,12 @@ static final Logger logger = LoggerFactory.getLogger(ClientPDaoImpl.class);
 		Criteria criteria = createEntityCriteria().addOrder(Order.asc("code"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
 		List<ClientP> clients = (List<ClientP>) criteria.list();
-		
-		
-		for(ClientP client : clients){
-			Hibernate.initialize(client.getClient());
+                for(ClientP client : clients){
+			Hibernate.initialize(client.getCodeville());
 		}
+		
 		return clients;
+		
 	}
 
     
