@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,10 +26,13 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "client_pp")
-public class ClientP extends Client {
+
+public class ClientP implements Serializable {
+ 
     
-    
-   
+    @Id
+    @Column(name = "code")
+    private Integer code;
     @NotEmpty
     @Column(name = "nom")
     private String nom;
@@ -40,10 +42,32 @@ public class ClientP extends Client {
     @NotEmpty
     @Column(name = "cin")
     private int cin;
-    
-        public ClientP() {
+    @OneToOne(optional = false,fetch = FetchType.LAZY)
+    @JoinTable(name = "client", 
+             joinColumns = { @JoinColumn(name = "code",nullable=false) })
+    private Client client;
+
+    public ClientP() {
     }
 
+    public ClientP(Integer code) {
+        this.code = code;
+    }
+
+    public ClientP(Integer code, String nom, String prenom, int cin) {
+        this.code = code;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.cin = cin;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
 
     public String getNom() {
         return nom;
@@ -69,6 +93,13 @@ public class ClientP extends Client {
         this.cin = cin;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     @Override
     public boolean equals(Object object) {
@@ -77,7 +108,7 @@ public class ClientP extends Client {
             return false;
         }
         ClientP other = (ClientP) object;
-        if ((this.getCode() == null && other.getCode() != null) || (this.getCode() != null && !this.getCode().equals(other.getCode()))) {
+        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
             return false;
         }
         return true;
@@ -85,7 +116,7 @@ public class ClientP extends Client {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.ClientP[ code=" + getCode() + " ]";
+        return "com.mind.ak47.begin.model.ClientP[ code=" + code + " ]";
     }
     
 }

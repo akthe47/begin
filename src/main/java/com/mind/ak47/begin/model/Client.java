@@ -13,8 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
@@ -29,8 +27,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "client")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Client implements Serializable {
+public class Client implements Serializable {
 
     
     @Id
@@ -51,7 +48,19 @@ public abstract class Client implements Serializable {
     private Ville codeville;
    
 
-    
+    public Client() {
+    }
+
+    public Client(Integer code) {
+        this.code = code;
+    }
+
+    public Client(Integer code, String adresse, String mail) {
+        this.code = code;
+        this.adresse = adresse;
+        this.mail = mail;
+    }
+
     public Integer getCode() {
         return code;
     }

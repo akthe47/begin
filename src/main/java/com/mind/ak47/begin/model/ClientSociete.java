@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,9 +27,13 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "client_societe")
-public class ClientSociete extends Client {
+
+public class ClientSociete implements Serializable {
 
 
+    @Id
+    @Column(name = "code")
+    private Integer code;
     
     @NotEmpty
     @Column(name = "raison_sociale")
@@ -40,10 +43,31 @@ public class ClientSociete extends Client {
     @Column(name = "matricule")
     private String matricule;
     
+    @OneToOne(optional = false,fetch = FetchType.LAZY)
+    @JoinTable(name = "client", 
+             joinColumns = { @JoinColumn(name = "code",nullable=false) })
+    private Client client;
+
     public ClientSociete() {
     }
 
+    public ClientSociete(Integer code) {
+        this.code = code;
+    }
 
+    public ClientSociete(Integer code, String raisonSociale, String matricule) {
+        this.code = code;
+        this.raisonSociale = raisonSociale;
+        this.matricule = matricule;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
 
     public String getRaisonSociale() {
         return raisonSociale;
@@ -61,6 +85,13 @@ public class ClientSociete extends Client {
         this.matricule = matricule;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
 
     @Override
@@ -70,7 +101,7 @@ public class ClientSociete extends Client {
             return false;
         }
         ClientSociete other = (ClientSociete) object;
-        if ((this.getCode() == null && other.getCode() != null) || (this.getCode() != null && !this.getCode().equals(other.getCode()))) {
+        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
             return false;
         }
         return true;
@@ -78,7 +109,7 @@ public class ClientSociete extends Client {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.ClientSociete[ code=" + getCode() + " ]";
+        return "com.mind.ak47.begin.model.ClientSociete[ code=" + code + " ]";
     }
     
 }
