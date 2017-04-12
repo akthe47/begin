@@ -109,7 +109,7 @@ public class ClientSociete implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.ClientSociete[ code=" + code + " ]";
+        return " com.mind.ak47.begin.model.ClientSociete[ code=" + code + " ]";
     }
     
 }
