@@ -54,7 +54,7 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><button type="button" class="btn btn-success">Consulter</button> <button type="button" class="btn btn-warning">Modifier</button> <button type="button" class="btn btn-danger">Supprimer</button> </td>
+                                                <td><a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/upd-client-${client.getCode()}' />" class="btn btn-success">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                             </tbody>

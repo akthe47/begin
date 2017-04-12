@@ -85,7 +85,16 @@ public class AppController {
                 model.addAttribute("mess","test");
 		return "clientslist";
 	}
-
+        
+        @RequestMapping(value = { "/view-client-{id}" }, method = RequestMethod.GET)
+	public String editClient(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientP cl = clientPService.findById(result);
+		model.addAttribute("cl", cl);
+		model.addAttribute("view", true);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "singleclient";
+	}
 	/**
 	 * This method will provide the medium to add a new user.
 	 */
@@ -131,7 +140,6 @@ public class AppController {
 		//return "success";
 		return "registrationsuccess";
 	}
-
 
 	/**
 	 * This method will provide the medium to update an existing user.
