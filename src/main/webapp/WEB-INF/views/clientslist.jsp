@@ -37,15 +37,15 @@
                                                 <tr>
                                                     <th width="20">Code</th>
                                                     <th>Nom (Raison sociale)</th>
-                                                    <th>CIN(MF)</th>
-                                                    <th>adresse</th>
+                                                    <th >CIN(MF)</th>
+                                                    <th width="200">adresse</th>
                                                     <th>Mail</th>
                                                     <th>Ville</th>
-                                                    <th>actions</th>
+                                                    <th width="300">actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
+                                                <c:if test="${not empty cl}" >
                                                     <c:forEach items="${cl}" var="client">
                                             <tr>
 						<td>${client.getCode()}</td>
@@ -54,9 +54,36 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/upd-client-${client.getCode()}' />" class="btn btn-success">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/sp-client-${client.getCode()}' />" class="btn btn-danger">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
+                                                </c:if>
+                                            <c:if test="${not empty clp}" >
+                                                    <c:forEach items="${clp}" var="client">
+                                            <tr>
+						<td>${client.getCode()}</td>
+                                                <td>${client.nom} </td>
+                                                <td> </td>
+						<td>${client.getAdresse()}</td>
+						<td>${client.getMail()}</td>
+						<td>${client.getCodeville().getDescription()}</td>
+                                                <td><a href="<c:url value='/view-clientpu-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/sp-client-${client.getCode()}' />" class="btn btn-danger">Supprimer</a></td>
+                                            </tr>
+                                                </c:forEach>
+                                                </c:if>
+                                            <c:if test="${not empty cls}" >
+                                                    <c:forEach items="${clp}" var="client">
+                                            <tr>
+						<td>${client.getCode()}</td>
+                                                <td>${client.raisonsociale} </td>
+                                                <td>${client.matricule}</td>
+						<td>${client.getAdresse()}</td>
+						<td>${client.getMail()}</td>
+						<td>${client.getCodeville().getDescription()}</td>
+                                                <td><a href="<c:url value='/view-clients-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/sp-client-${client.getCode()}' />" class="btn btn-danger">Supprimer</a></td>
+                                            </tr>
+                                                </c:forEach>
+                                                </c:if>
                                             </tbody>
                                         </table>
                                     </div>

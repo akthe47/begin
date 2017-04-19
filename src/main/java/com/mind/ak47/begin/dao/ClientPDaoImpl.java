@@ -27,7 +27,7 @@ static final Logger logger = LoggerFactory.getLogger(ClientPDaoImpl.class);
     
     public ClientP findById(int id) {
 		ClientP client = getByKey(id);
-                
+                Hibernate.initialize(client.getCodeville());
 		return client;
 	}
     public void save(ClientP client) {

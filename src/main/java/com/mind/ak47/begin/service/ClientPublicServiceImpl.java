@@ -17,6 +17,8 @@ import com.mind.ak47.begin.model.ClientPublic;
  *
  * @author ak47@minduos
  */
+@Service("ClientPublicService")
+@Transactional
 public class ClientPublicServiceImpl implements ClientPublicService{
         @Autowired
 	ClientPublicDao dao;

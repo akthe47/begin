@@ -2,6 +2,8 @@ package com.mind.ak47.begin.controller;
 
 import com.mind.ak47.begin.model.Client;
 import com.mind.ak47.begin.model.ClientP;
+import com.mind.ak47.begin.model.ClientPublic;
+import com.mind.ak47.begin.model.ClientSociete;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +31,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.mind.ak47.begin.model.User;
 import com.mind.ak47.begin.model.UserProfile;
 import com.mind.ak47.begin.service.ClientPService;
+import com.mind.ak47.begin.service.ClientPublicService;
+import com.mind.ak47.begin.service.ClientSocieteService;
 //import com.mind.ak47.begin.service.ClientService;
 import com.mind.ak47.begin.service.UserProfileService;
 import com.mind.ak47.begin.service.UserService;
@@ -51,6 +55,10 @@ public class AppController {
 	//ClientService clientService;
          @Autowired
 	ClientPService clientPService;
+         @Autowired
+	ClientPublicService clientPubService;
+         @Autowired
+	ClientSocieteService clientSService;
 	
 	@Autowired
 	UserProfileService userProfileService;
@@ -79,21 +87,29 @@ public class AppController {
         @RequestMapping(value = { "/listcl" }, method = RequestMethod.GET)
 	public String listClients(ModelMap model) {
                 List<ClientP> clientsp=clientPService.findAllClient();
-		
+                List<ClientPublic> clientspu=clientPubService.findAllClient();
+                List<ClientSociete> clientss=clientSService.findAllClient();
+		if (!(clientsp.isEmpty()||clientsp==null))
 		model.addAttribute("cl", clientsp);
+                if (!(clientspu.isEmpty()||clientspu==null))
+		model.addAttribute("clp", clientspu);
+                if (!(clientss.isEmpty()||clientss==null))
+		model.addAttribute("cls", clientss);
+                
+                
 		model.addAttribute("loggedinuser", getPrincipal());
                 model.addAttribute("mess","test");
 		return "clientslist";
 	}
         
-        @RequestMapping(value = { "/view-client-{id}" }, method = RequestMethod.GET)
+        @RequestMapping(value = { "/viewp-client-{id}" }, method = RequestMethod.GET)
 	public String editClient(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
                 ClientP cl = clientPService.findById(result);
-		model.addAttribute("cl", cl);
+		model.addAttribute("client", cl);
 		model.addAttribute("view", true);
 		model.addAttribute("loggedinuser", getPrincipal());
-		return "singleclient";
+		return "viewclients";
 	}
 	/**
 	 * This method will provide the medium to add a new user.
