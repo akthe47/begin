@@ -16,6 +16,8 @@ import com.mind.ak47.begin.model.Ville;
  *
  * @author ak47@minduos
  */
+@Service("villeService")
+@Transactional
 public class VilleServiceImpl implements VilleService{
         @Autowired
 	VilleDao dao;

@@ -54,7 +54,7 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/sp-client-${client.getCode()}' />" class="btn btn-danger">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/upp-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/supp-client-${client.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                                 </c:if>
@@ -67,20 +67,20 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/view-clientpu-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/sp-client-${client.getCode()}' />" class="btn btn-danger">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewpu-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/suppu-client-${client.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                                 </c:if>
                                             <c:if test="${not empty cls}" >
-                                                    <c:forEach items="${clp}" var="client">
+                                                    <c:forEach items="${cls}" var="client">
                                             <tr>
 						<td>${client.getCode()}</td>
-                                                <td>${client.raisonsociale} </td>
+                                                <td>${client.raisonSociale} </td>
                                                 <td>${client.matricule}</td>
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/view-clients-${client.getCode()}' />" class="btn btn-success">Consulter</a> <a href="<c:url value='/view-client-${client.getCode()}' />" class="btn btn-warning">Modifier</a> <a href="<c:url value='/sp-client-${client.getCode()}' />" class="btn btn-danger">Supprimer</a></td>
+                                                <td><a href="<c:url value='/views-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/ups-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/sups-client-${client.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                                 </c:if>
@@ -94,7 +94,14 @@
                           
 
                         </div>
-                    </div>                                
+                    </div>
+                    
+                    <div class="row">
+                        
+                        <center><button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client</button></center>
+                        
+                    </div>
                     
                 </div>
+                
 <%@include file="dashf.jsp" %>

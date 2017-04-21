@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.mind.ak47.begin.model.User;
+import com.mind.ak47.begin.model.Ville;
 import com.mind.ak47.begin.model.UserProfile;
 import com.mind.ak47.begin.service.ClientPService;
 import com.mind.ak47.begin.service.ClientPublicService;
@@ -36,6 +37,7 @@ import com.mind.ak47.begin.service.ClientSocieteService;
 //import com.mind.ak47.begin.service.ClientService;
 import com.mind.ak47.begin.service.UserProfileService;
 import com.mind.ak47.begin.service.UserService;
+import com.mind.ak47.begin.service.VilleService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -55,6 +57,7 @@ public class AppController {
 	//ClientService clientService;
          @Autowired
 	ClientPService clientPService;
+        
          @Autowired
 	ClientPublicService clientPubService;
          @Autowired
@@ -71,19 +74,31 @@ public class AppController {
 	
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
+         @Autowired
+	VilleService villeService;
 	
+         
+         
+         
+         /**
+         * 
+         * PROJETs
+         *  
+         */
 	
-	/**
-	 * This method will list all existing users.
-	 */
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
-	public String listUsers(ModelMap model) {
-
-		List<User> users = userService.findAllUsers();
-		model.addAttribute("users", users);
+        @RequestMapping(value = { "/listpr" }, method = RequestMethod.GET)
+	public String listProjets(ModelMap model) {
+                
 		model.addAttribute("loggedinuser", getPrincipal());
-		return "userslist";
+                model.addAttribute("mess","test");
+		return "projetslist";
 	}
+	/**
+         * 
+         * CLIENTs
+         *  
+         */
+	
         @RequestMapping(value = { "/listcl" }, method = RequestMethod.GET)
 	public String listClients(ModelMap model) {
                 List<ClientP> clientsp=clientPService.findAllClient();
@@ -103,13 +118,125 @@ public class AppController {
 	}
         
         @RequestMapping(value = { "/viewp-client-{id}" }, method = RequestMethod.GET)
-	public String editClient(@PathVariable String id, ModelMap model) {
+	public String viewClientp(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientP cl = clientPService.findById(result);
+                
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 2);
+                model.addAttribute("type", 1);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/viewpu-client-{id}" }, method = RequestMethod.GET)
+	public String viewClientpu(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientPublic cl = clientPubService.findById(result);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 1);
+                model.addAttribute("type", 1);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/views-client-{id}" }, method = RequestMethod.GET)
+	public String viewClients(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientSociete cl = clientSService.findById(result);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 3);
+                model.addAttribute("type", 1);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/upp-client-{id}" }, method = RequestMethod.GET)
+	public String upClientp(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientP cl = clientPService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 2);
+                model.addAttribute("type", 3);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/uppu-client-{id}" }, method = RequestMethod.GET)
+	public String upClientpu(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientPublic cl = clientPubService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 1);
+                model.addAttribute("type", 3);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/ups-client-{id}" }, method = RequestMethod.GET)
+	public String upClients(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientSociete cl = clientSService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 3);
+                model.addAttribute("type", 3);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/supp-client-{id}" }, method = RequestMethod.GET)
+	public String supClientp(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
                 ClientP cl = clientPService.findById(result);
 		model.addAttribute("client", cl);
-		model.addAttribute("view", true);
+		model.addAttribute("h", 2);
+                model.addAttribute("type", 2);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "viewclients";
+	}
+        @RequestMapping(value = { "/suppu-client-{id}" }, method = RequestMethod.GET)
+	public String supClientpu(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientPublic cl = clientPubService.findById(result);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 1);
+                model.addAttribute("type", 2);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/sups-client-{id}" }, method = RequestMethod.GET)
+	public String supClients(@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientSociete cl = clientSService.findById(result);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 3);
+                model.addAttribute("type", 2);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /**
+         * USERs
+         */
+        
+        /**
+	 * This method will list all existing users.
+	 */
+	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	public String listUsers(ModelMap model) {
+
+		List<User> users = userService.findAllUsers();
+		model.addAttribute("users", users);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "userslist";
 	}
 	/**
 	 * This method will provide the medium to add a new user.

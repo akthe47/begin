@@ -26,7 +26,7 @@ public class ClientSocieteDaoImpl extends AbstractDao<Integer, ClientSociete> im
     
     public ClientSociete findById(int id) {
 		ClientSociete client = getByKey(id);
-                
+                Hibernate.initialize(client.getCodeville());
 		
 		return client;
 	}
