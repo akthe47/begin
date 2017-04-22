@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mind.ak47.begin.dao;
-import com.mind.ak47.begin.model.Tel;
+package com.mind.ak47.begin.service;
+
 import java.util.List;
+import com.mind.ak47.begin.model.Document;
 /**
  *
  * @author ak47@minduos
  */
-public interface TelDao {
-     Tel findById(int id);
+public interface DocumentService {
+    Document findById(int id);
 	
-	void save(Tel tel);
+	void save(Document document);
 	
 	void deleteById(int id);
 	
-	List<Tel> findAllTel();
+	List<Document> findAllDocument();
     
 }

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository("projetDao")
-public class ProjetDaoImpl extends AbstractDao<Integer, Projet> implements ProjetPKDao{
+public class ProjetDaoImpl extends AbstractDao<Integer, Projet> implements ProjetDao{
     
     static final Logger logger = LoggerFactory.getLogger(ProjetDaoImpl.class);
     public Projet findById(int id) {
