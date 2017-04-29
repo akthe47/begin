@@ -15,7 +15,7 @@ public interface ClientSocieteService {
         ClientSociete findById(int id);
 	
 	void save(ClientSociete client);
-	
+	public void update(ClientSociete client);
 	void deleteById(int id);
 	
 	List<ClientSociete> findAllClient();

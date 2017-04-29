@@ -11,7 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -32,9 +34,16 @@ public class Document implements Serializable {
     @Column(name = "description")
     private String description;
     
-    @JoinColumn(name = "code", referencedColumnName = "code", insertable = false, updatable = false)
+    /*@JoinColumn(name = "code", referencedColumnName = "code", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Projet projet;
+    private Projet projet;*/
+     @MapsId("documentPK")
+    @JoinColumns({
+        @JoinColumn(name="annee", referencedColumnName="annee"),
+        @JoinColumn(name="code", referencedColumnName="code")
+    })
+    @ManyToOne
+    public Projet projet;
     
 
     public Document() {
@@ -49,9 +58,6 @@ public class Document implements Serializable {
         this.description = description;
     }
 
-    public Document(short annee, int code, int numordre) {
-        this.documentPK = new DocumentPK(annee, code, numordre);
-    }
 
     public DocumentPK getDocumentPK() {
         return documentPK;
@@ -69,13 +75,13 @@ public class Document implements Serializable {
         this.description = description;
     }
 
-    public Projet getProjet() {
+    /*public Projet getProjet() {
         return projet;
     }
 
     public void setProjet(Projet projet) {
         this.projet = projet;
-    }
+    }*/
 
     
     @Override

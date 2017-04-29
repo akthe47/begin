@@ -13,7 +13,7 @@ import com.mind.ak47.begin.model.Projetprive;
  * @author ak47@minduos
  */
 public interface ProjetpriveService {
-    Projetprive findById(int id);
+    Projetprive findById(int id,short ida);
 	
 	void save(Projetprive projetprive);
 	

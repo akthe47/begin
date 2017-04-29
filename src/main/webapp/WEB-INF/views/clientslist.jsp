@@ -54,7 +54,7 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/upp-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/supp-client-${client.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/upp-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/supp-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                                 </c:if>
@@ -67,7 +67,7 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/viewpu-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/suppu-client-${client.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewpu-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/suppu-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                                 </c:if>
@@ -80,7 +80,7 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/views-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/ups-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/sups-client-${client.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
+                                                <td><a href="<c:url value='/views-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/ups-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/sups-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger">Supprimer</a></td>
                                             </tr>
                                                 </c:forEach>
                                                 </c:if>
@@ -98,10 +98,22 @@
                     
                     <div class="row">
                         
-                        <center><button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client</button></center>
+                        <center><button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Public</button> <button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Privé</button> <button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Societé</button></center>
                         
                     </div>
-                    
+                    <div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
+                    <div class="mb-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
                 </div>
                 
 <%@include file="dashf.jsp" %>

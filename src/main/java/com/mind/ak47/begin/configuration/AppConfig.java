@@ -10,6 +10,7 @@ package com.mind.ak47.begin.configuration;
  * @author ak47@minduos
  */
 
+import com.mind.ak47.begin.converter.CodeVilleToVille;
 import com.mind.ak47.begin.converter.RoleToUserProfileConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -37,7 +38,8 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
-	
+	@Autowired
+	       CodeVilleToVille codevtov;
 
 	/**
      * Configure ViewResolvers to deliver preferred views.
@@ -67,6 +69,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserProfileConverter);
+        registry.addConverter(codevtov);
     }
 	
 

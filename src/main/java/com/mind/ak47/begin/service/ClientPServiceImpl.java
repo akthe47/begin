@@ -28,6 +28,18 @@ public class ClientPServiceImpl implements ClientPService{
 	public void save(ClientP client){dao.save(client);}
 	
 	public void deleteById(int id){dao.deleteById(id);}
+        public void update(ClientP client) {
+            
+		ClientP entity = dao.findById(client.getCode());
+		if(entity!=null){
+			entity.setAdresse(client.getAdresse());
+			entity.setCin(client.getCin());
+			entity.setCodeville(client.getCodeville());
+                        entity.setMail(client.getMail());
+                        entity.setNom(client.getNom());
+                        entity.setPrenom(client.getPrenom());
+		}
+	}
 	
 	public List<ClientP> findAllClient(){return dao.findAllClient();}
     

@@ -5,6 +5,7 @@
  */
 package com.mind.ak47.begin.dao;
 
+import com.mind.ak47.begin.model.ProjetPK;
 import com.mind.ak47.begin.model.Projetpublic;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -20,12 +21,13 @@ import org.springframework.stereotype.Repository;
  * @author ak47@minduos
  */
 @Repository("projetpublicDao")
-public class ProjetpublicDaoImpl extends AbstractDao<Integer, Projetpublic> implements ProjetpublicDao{
+public class ProjetpublicDaoImpl extends AbstractDao<ProjetPK, Projetpublic> implements ProjetpublicDao{
     
     
     static final Logger logger = LoggerFactory.getLogger(ProjetpublicDaoImpl.class);
-    public Projetpublic findById(int id) {
-		Projetpublic projetpublic = getByKey(id);
+    public Projetpublic findById(int id,short ida) {
+                ProjetPK pk=new ProjetPK(ida, id);
+		Projetpublic projetpublic = getByKey(pk);
                 /*if(projetpublic!=null){
 			Hibernate.initialize(projetpublic.getCodeville());
 		}*/
@@ -42,7 +44,7 @@ public class ProjetpublicDaoImpl extends AbstractDao<Integer, Projetpublic> impl
 		delete(projetpublic);
 	}
     public List<Projetpublic> findAllProjetpublic() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("code"));
+		Criteria criteria = createEntityCriteria();
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
 		List<Projetpublic> projetpublics = (List<Projetpublic>) criteria.list();
 		

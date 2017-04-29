@@ -26,7 +26,17 @@ public class ClientPublicServiceImpl implements ClientPublicService{
         public ClientPublic findById(int id){return dao.findById(id);}
 	
 	public void save(ClientPublic client){dao.save(client);}
-	
+	public void update(ClientPublic client) {
+		ClientPublic entity = dao.findById(client.getCode());
+		if(entity!=null){
+			entity.setAdresse(client.getAdresse());
+			
+			entity.setCodeville(client.getCodeville());
+                        entity.setMail(client.getMail());
+                        entity.setNom(client.getNom());
+                        
+		}
+	}
 	public void deleteById(int id){dao.deleteById(id);}
 	
 	public List<ClientPublic> findAllClient(){return dao.findAllClient();}

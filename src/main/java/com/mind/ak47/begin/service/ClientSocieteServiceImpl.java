@@ -26,7 +26,17 @@ public class ClientSocieteServiceImpl implements ClientSocieteService{
         public ClientSociete findById(int id){return dao.findById(id);}
 	
 	public void save(ClientSociete client){dao.save(client);}
-	
+	public void update(ClientSociete client) {
+		ClientSociete entity = dao.findById(client.getCode());
+		if(entity!=null){
+			entity.setAdresse(client.getAdresse());
+			entity.setMatricule(client.getMatricule());
+			entity.setCodeville(client.getCodeville());
+                        entity.setMail(client.getMail());
+                        entity.setRaisonSociale(client.getRaisonSociale());
+                        
+		}
+	}
 	public void deleteById(int id){dao.deleteById(id);}
 	
 	public List<ClientSociete> findAllClient(){return dao.findAllClient();}

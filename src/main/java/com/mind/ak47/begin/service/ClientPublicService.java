@@ -15,7 +15,7 @@ public interface ClientPublicService {
     ClientPublic findById(int id);
 	
 	void save(ClientPublic client);
-	
+	public void update(ClientPublic client);
 	void deleteById(int id);
 	
 	List<ClientPublic> findAllClient();

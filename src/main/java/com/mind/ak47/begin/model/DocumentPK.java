@@ -9,6 +9,10 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -17,7 +21,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class DocumentPK implements Serializable {
 
-    @Basic(optional = false)
+    /*@Basic(optional = false)
     @Column(name = "annee")
     private short annee;
     @Basic(optional = false)
@@ -25,32 +29,21 @@ public class DocumentPK implements Serializable {
     private int code;
     @Basic(optional = false)
     @Column(name = "numordre")
-    private int numordre;
-
+    private int numordre;*/
+    ProjetPK p;
+    @Basic(optional = false)
+    @Column(name = "numordre")
+     private int numordre;
+    
+    
     public DocumentPK() {
     }
 
-    public DocumentPK(short annee, int code, int numordre) {
-        this.annee = annee;
-        this.code = code;
+    public DocumentPK(ProjetPK p, int numordre) {
+        this.p=p;
         this.numordre = numordre;
     }
 
-    public short getAnnee() {
-        return annee;
-    }
-
-    public void setAnnee(short annee) {
-        this.annee = annee;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public int getNumordre() {
         return numordre;
@@ -60,14 +53,7 @@ public class DocumentPK implements Serializable {
         this.numordre = numordre;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) annee;
-        hash += (int) code;
-        hash += (int) numordre;
-        return hash;
-    }
+/*
 
     @Override
     public boolean equals(Object object) {
@@ -92,5 +78,5 @@ public class DocumentPK implements Serializable {
     public String toString() {
         return "com.mind.ak47.begin.model.DocumentPK[ annee=" + annee + ", code=" + code + ", numordre=" + numordre + " ]";
     }
-    
+    */
 }

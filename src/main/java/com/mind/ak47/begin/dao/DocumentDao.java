@@ -11,7 +11,7 @@ import java.util.List;
  * @author ak47@minduos
  */
 public interface DocumentDao  {
-     Document findById(int id);
+     Document findById(int annne);
 	
 	void save(Document document);
 	

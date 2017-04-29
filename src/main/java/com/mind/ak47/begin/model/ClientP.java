@@ -37,7 +37,7 @@ public class ClientP extends Client {
     @NotEmpty
     @Column(name = "prenom")
     private String prenom;
-    @NotEmpty
+    @NotNull
     @Column(name = "cin")
     private int cin;
     
@@ -85,7 +85,7 @@ public class ClientP extends Client {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.ClientP[ code=" + getCode() + " ]";
+        return "com.mind.ak47.begin.model.ClientP[ code=" + getCode() + " ]"+getAdresse();
     }
     
 }

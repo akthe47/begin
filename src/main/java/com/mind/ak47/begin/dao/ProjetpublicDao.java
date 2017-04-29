@@ -11,7 +11,7 @@ import java.util.List;
  * @author ak47@minduos
  */
 public interface ProjetpublicDao {
-     Projetpublic findById(int id);
+     Projetpublic findById(int id,short ida);
 	
 	void save(Projetpublic projetpublic);
 	

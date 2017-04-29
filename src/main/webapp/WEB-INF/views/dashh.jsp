@@ -37,12 +37,12 @@
                     
                     <li class="xn-title"><center>Navigation</center></li>                    
 							<li>
-							<a href="templateclients.html"><span class="fa fa-user"></span><span class="xn-text">Clients</span></a>
+							<a href="<c:url value='/listcl' />"><span class="fa fa-user"></span><span class="xn-text">Clients</span></a>
 							</li>
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Projets</span></a>
                         <ul>
-                            <li><a href="templateprojets.html"><span class="fa fa-image"></span> Consulter et Gérer</a></li>
+                            <li><a href="<c:url value='/listpr' />"><span class="fa fa-image"></span> Consulter et Gérer</a></li>
                             <li><a href="pages-invoice.html"><span class="fa fa-dollar"></span> Statistics</a></li>
                                                         
                         </ul>

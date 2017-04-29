@@ -23,7 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "projetprive")
-
 public class Projetprive extends Projet {
 
     

@@ -19,10 +19,10 @@ public class ProjetPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "annee")
-    private short annee;
+     short annee;
     @Basic(optional = false)
     @Column(name = "code")
-    private int code;
+     int code;
 
     public ProjetPK() {
     }

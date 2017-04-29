@@ -20,7 +20,7 @@ import java.util.List;
 public class ProjetpublicServiceImpl implements ProjetpublicService{
     @Autowired
     ProjetpublicDao dao;
-    public Projetpublic findById(int id){return dao.findById(id);}
+    public Projetpublic findById(short ida,int id){return dao.findById(id,ida);}
 	
 	public void save(Projetpublic projetpublic){dao.save(projetpublic);}
 	

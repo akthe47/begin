@@ -32,9 +32,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "projet")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Projet implements Serializable {
+public abstract class Projet {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProjetPK projetPK;
     @Basic(optional = false)
@@ -78,7 +78,20 @@ public abstract class Projet implements Serializable {
     public Projet(ProjetPK projetPK) {
         this.projetPK = projetPK;
     }
+    public int getCode() {
+        return projetPK.getCode();
+    }
 
+    public void setCode(int code) {
+        this.projetPK.setCode(code) ;
+    }
+    public int getAnnee() {
+        return projetPK.getAnnee();
+    }
+
+    public void setAnnee(short code) {
+        this.projetPK.setAnnee(code) ;
+    }
     public Projet(ProjetPK projetPK, String adresse, String description, Date datedebut, Date datefin, String personneacontacter, int numtel, String maitreouvrage, double montatnttravaux) {
         this.projetPK = projetPK;
         this.adresse = adresse;

@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="dashh.jsp" %>
 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
@@ -32,31 +33,54 @@
                                         <table id="example" class="table datatable table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Position</th>
-                                                    <th>Office</th>
-                                                    <th>Age</th>
-                                                    <th>Start date</th>
-                                                    <th>Salary</th>
+                                                    <th>code</th>
+                                                    <th>code client</th>
+                                                    <th>adresse</th>
+                                                    <th>description</th>
+                                                    <th>date debut</th>
+                                                    <th>date fin</th>
+                                                    <th>personne a contacter</th>
+                                                    <th>num tel</th>
+                                                    <th>maitre d'ouvrage</th>
+                                                    <th>montant travaux</th>
+                                                    <th>actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <c:if test="${not empty projetpu}" >
+                                                    <c:forEach items="${projetpu}" var="projet">
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td>$320,800</td>
+                                                    <td>PU ${projet.getProjetPK().getAnnee()} / ${projet.getProjetPK().getCode()}</td>
+                                                    <td>${projet.codeclient.getCode()}</td>
+                                                    <td>${projet.adresse}</td>
+                                                    <td>${projet.description}</td>
+                                                    <td>${projet.datedebut}</td>
+                                                    <td>${projet.datefin}</td>
+                                                    <td>${projet.personneacontacter}</td>
+                                                    <td>${projet.numtel}</td>
+                                                    <td>${projet.maitreouvrage}</td>
+                                                    <td>${projet.montatnttravaux}</td>
+                                                    <td><a href="<c:url value='/viewpu-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/suppu-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                                 </tr>
-												<tr>
-                                                    <td>adza</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
-                                                    <td>$320,800</td>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:if test="${not empty projetpr}" >
+                                                    <c:forEach items="${projetpr}" var="projet">
+                                                <tr>
+                                                    <td>PR ${projet.getProjetPK().getAnnee()} / ${projet.getProjetPK().getCode()}</td>
+                                                    <td>${projet.codeclient.getCode()}</td>
+                                                    <td>${projet.adresse}</td>
+                                                    <td>${projet.description}</td>
+                                                    <td>${projet.datedebut}</td>
+                                                    <td>${projet.datefin}</td>
+                                                    <td>${projet.personneacontacter}</td>
+                                                    <td>${projet.numtel}</td>
+                                                    <td>${projet.maitreouvrage}</td>
+                                                    <td><fmt:formatNumber type="number" groupingUsed="false" value="${projet.montatnttravaux}" /></td>
+                                                    <td><a href="<c:url value='/viewpr-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppr-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/suppr-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                                 </tr>
+                                                    </c:forEach>
+                                                </c:if>
                                                 
                                             </tbody>
                                         </table>
@@ -65,88 +89,14 @@
                             </div>
                             <!-- END DEFAULT DATATABLE -->
 
-                          <div class="panel panel-default">
-						  <div class="panel-heading">
-                                    <h3 class="panel-title">Recherche simple</h3>
-                                    <ul class="panel-controls">
-                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                                    </ul>                                
-                          </div>
-                                <div class="panel-body">                                    
-                                    <div class="row stacked">
-									
-                                        <div class="col-md-6">
-                                            <div class="input-group push-down-10">
-                                                <span class="input-group-addon"><span class="fa fa-search"></span></span>
-                                                <input type="text" class="form-control" placeholder="Recherche simple par..." />
-                                                <div class="input-group-btn">
-                                                    <button class="btn btn-primary">Recherche simple</button>
-                                                </div>
-                                            </div>                                                                
-                                            
-                                            <span class="line-height-30" hidden="true">résultats trouvés pour<strong></strong> $ resultats</span>
-                                        </div>
-                                        <div class="col-md-6">
-                                           
-                                            <div class="pull-right push-down-10">
-                                                <div class="form-group">
-                                            <label class="radio-material">
-                                                <input id="radio1" type="radio" name="radios" checked>
-                                                <span class="outer"><span class="inner"></span></span> Client
-                                            </label>                                            
-                                            <label class="radio-material">
-                                                <input id="radio2" type="radio" name="radios">
-                                                <span class="outer"><span class="inner"></span></span> Ville
-                                            </label>
-                                        </div>            
-                                        </div>
-                                            </div>
-                                                                                    
-                                        </div>
-                                    </div>
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Recherche par date</h3>
-                                    <ul class="panel-controls">
-                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
-                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
-                                    </ul>                                
-                                </div>
-                                <div class="panel-body">                                    
-                                    <div class="row stacked">
-                                        
-                                            <div class="input-group push-down-10">
-                                                <span class="input-group-addon"><span class="fa fa-search"></span></span>
-                                                <div class="col-md-6">
-                                                <div class="input-group">
-                                                    <input type="text" class="mask-date form-control datepicker" >
-                                                    <span class="input-group-addon add-on"> - </span>
-                                                    <input type="text" class="mask-date form-control datepicker" >
-													<div class="input-group-btn">
-                                                    <button class="btn btn-primary">Recherche avancé par date</button>
-                                                </div>
-                                                </div>
-												
-												</div>
-                                                
-												
-                                            </div>                                                                
-                                            
-                                            <span class="line-height-30" hidden="true">résultats trouvés pour<strong></strong> $ resultats</span>
-                                        </div>
-                                        
-                                    </div>
-                                </div>                                                                
-                            </div>
+                          
 					                                             
                             </div>
 
                         </div>
 						
-                    </div>
+                </div>
 						
                     
-                </div>
+                
 <%@include file="dashf.jsp" %>				

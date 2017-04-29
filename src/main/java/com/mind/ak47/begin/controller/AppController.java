@@ -4,6 +4,8 @@ import com.mind.ak47.begin.model.Client;
 import com.mind.ak47.begin.model.ClientP;
 import com.mind.ak47.begin.model.ClientPublic;
 import com.mind.ak47.begin.model.ClientSociete;
+import com.mind.ak47.begin.model.Projetprive;
+import com.mind.ak47.begin.model.Projetpublic;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,6 +36,8 @@ import com.mind.ak47.begin.model.UserProfile;
 import com.mind.ak47.begin.service.ClientPService;
 import com.mind.ak47.begin.service.ClientPublicService;
 import com.mind.ak47.begin.service.ClientSocieteService;
+import com.mind.ak47.begin.service.ProjetpriveService;
+import com.mind.ak47.begin.service.ProjetpublicService;
 //import com.mind.ak47.begin.service.ClientService;
 import com.mind.ak47.begin.service.UserProfileService;
 import com.mind.ak47.begin.service.UserService;
@@ -41,6 +45,7 @@ import com.mind.ak47.begin.service.VilleService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.validation.ObjectError;
 
 
 
@@ -65,7 +70,10 @@ public class AppController {
 	
 	@Autowired
 	UserProfileService userProfileService;
-	
+	@Autowired
+	ProjetpublicService ProjetpuService;
+        @Autowired
+        ProjetpriveService ProjetpriveService;
 	@Autowired
 	MessageSource messageSource;
 
@@ -88,10 +96,63 @@ public class AppController {
 	
         @RequestMapping(value = { "/listpr" }, method = RequestMethod.GET)
 	public String listProjets(ModelMap model) {
-                
+                List<Projetprive> prpr=ProjetpriveService.findAllProjetprive();
+                List<Projetpublic> prpu=ProjetpuService.findAllProjetpublic();
+                model.addAttribute("projetpu",prpu);
+                model.addAttribute("projetpr",prpr);
 		model.addAttribute("loggedinuser", getPrincipal());
                 model.addAttribute("mess","test");
 		return "projetslist";
+	}
+        @RequestMapping(value = { "/viewpr-projet-{ida}-{id}" }, method = RequestMethod.GET)
+	public String viewProjetpr(@PathVariable String ida,@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                short result1 = Short.parseShort(ida);
+                Projetprive prpr=ProjetpriveService.findById(result,result1);
+                
+                model.addAttribute("projet",prpr);
+		
+		//model.addAttribute("h", 2);
+                model.addAttribute("type", 1);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewprojets";
+	}
+        @RequestMapping(value = { "/viewpu-projet-{ida}-{id}" }, method = RequestMethod.GET)
+	public String viewProjetpu(@PathVariable String ida,@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                short result1 = Short.parseShort(ida);
+                Projetpublic prpu=ProjetpuService.findById(result1,result);
+                
+                model.addAttribute("projet",prpu);
+		
+		//model.addAttribute("h", 2);
+                model.addAttribute("type", 1);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewprojets";
+	}
+        @RequestMapping(value = { "/uppr-projet-{ida}-{id}" }, method = RequestMethod.GET)
+	public String upProjetpr(@PathVariable String ida,@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientP cl = clientPService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 2);
+                model.addAttribute("type", 3);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
+	}
+        @RequestMapping(value = { "/uppu-projet-{ida}-{id}" }, method = RequestMethod.GET)
+	public String upProjetpu(@PathVariable String ida,@PathVariable String id, ModelMap model) {
+		int result = Integer.parseInt(id);
+                ClientP cl = clientPService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
+		model.addAttribute("client", cl);
+		model.addAttribute("h", 2);
+                model.addAttribute("type", 3);
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "viewclients";
 	}
 	/**
          * 
@@ -121,7 +182,8 @@ public class AppController {
 	public String viewClientp(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
                 ClientP cl = clientPService.findById(result);
-                
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
 		model.addAttribute("client", cl);
 		model.addAttribute("h", 2);
                 model.addAttribute("type", 1);
@@ -132,6 +194,8 @@ public class AppController {
 	public String viewClientpu(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
                 ClientPublic cl = clientPubService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
 		model.addAttribute("client", cl);
 		model.addAttribute("h", 1);
                 model.addAttribute("type", 1);
@@ -142,12 +206,16 @@ public class AppController {
 	public String viewClients(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
                 ClientSociete cl = clientSService.findById(result);
+                List<Ville> villes=villeService.findAllVille();
+                model.addAttribute("villes",villes);
 		model.addAttribute("client", cl);
 		model.addAttribute("h", 3);
                 model.addAttribute("type", 1);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "viewclients";
 	}
+        
+        
         @RequestMapping(value = { "/upp-client-{id}" }, method = RequestMethod.GET)
 	public String upClientp(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
@@ -160,6 +228,51 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "viewclients";
 	}
+        
+        
+        @RequestMapping(value = { "/upp-client-{id}" }, method = RequestMethod.POST)
+	public String updateclientp(@Valid ClientP client, BindingResult result,
+			ModelMap model, @PathVariable String id) {
+                        
+		
+                if (result.hasErrors()) {
+                        
+                      List<FieldError> errors = result.getFieldErrors();
+                      String m="";
+                        for (FieldError error : errors ) {
+                            m+= error.getObjectName() + " - " + error.getDefaultMessage();
+                            }
+                      model.addAttribute("sss", m);
+                      model.addAttribute("aaa", "mmmmmmmmm");
+                      model.addAttribute("aaa", "mmmmmmmmm");
+                      
+                                          
+                                          model.addAttribute("aaa", "mmmmmmmmm");
+                      return "redirect://upp-client-{id}";
+                      
+			
+		}
+                
+		/*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
+		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
+			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+		    result.addError(ssoError);
+			return "registration";
+		}*/
+
+                System.out.println("com.mind.ak47.begin.controller.AppController.updateclientp()");
+                //System.err.println("dddddddddddddddddd"+client.toString());
+		clientPService.update(client);
+
+		//model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " updated successfully");
+		//model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", getPrincipal());
+                
+		return "redirect:/listcl";
+	}
+        
+        
+        
         @RequestMapping(value = { "/uppu-client-{id}" }, method = RequestMethod.GET)
 	public String upClientpu(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
@@ -172,6 +285,43 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "viewclients";
 	}
+        
+        @RequestMapping(value = { "/uppu-client-{id}" }, method = RequestMethod.POST)
+	public String updateclientpu(@Valid ClientPublic client, BindingResult result,
+			ModelMap model, @PathVariable String id) {
+                        
+		
+                if (result.hasErrors()) {
+                        
+                      List<FieldError> errors = result.getFieldErrors();
+                      String m="";
+                        for (FieldError error : errors ) {
+                            m+= error.getObjectName() + " - " + error.getDefaultMessage();
+                            }
+                      model.addAttribute("sss", m);
+                      
+                      return "redirect://uppu-client-{id}";
+                      
+			
+		}
+                
+		/*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
+		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
+			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+		    result.addError(ssoError);
+			return "registration";
+		}*/
+		clientPubService.update(client);
+
+		//model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " updated successfully");
+		//model.addAttribute("loggedinuser", getPrincipal());
+                model.addAttribute("loggedinuser", getPrincipal());
+                
+		return "redirect:/listcl";
+	}
+        
+        
+        
         @RequestMapping(value = { "/ups-client-{id}" }, method = RequestMethod.GET)
 	public String upClients(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
@@ -184,6 +334,41 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "viewclients";
 	}
+        
+        @RequestMapping(value = { "/ups-client-{id}" }, method = RequestMethod.POST)
+	public String updateclients(@Valid ClientSociete client, BindingResult result,
+			ModelMap model, @PathVariable String id) {
+                        
+		
+                if (result.hasErrors()) {
+                        
+                      List<FieldError> errors = result.getFieldErrors();
+                      String m="";
+                        for (FieldError error : errors ) {
+                            m+= error.getObjectName() + " - " + error.getDefaultMessage();
+                            }
+                      model.addAttribute("sss", m);
+                      
+                      return "redirect://ups-client-{id}";
+                      	
+		}
+                
+		/*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
+		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
+			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+		    result.addError(ssoError);
+			return "registration";
+		}*/
+
+              
+		clientSService.update(client);
+                model.addAttribute("loggedinuser", getPrincipal());
+                
+		return "redirect:/listcl";
+	}
+        
+        /*
+        
         @RequestMapping(value = { "/supp-client-{id}" }, method = RequestMethod.GET)
 	public String supClientp(@PathVariable String id, ModelMap model) {
 		int result = Integer.parseInt(id);
@@ -214,22 +399,17 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "viewclients";
 	}
-        
-        
-        
-        
-        
-        
-        
-        
-        
+       
+           */
         /**
          * USERs
          */
-        
+ 
+
         /**
-	 * This method will list all existing users.
+	 * 
 	 */
+        /*
 	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 
@@ -237,10 +417,11 @@ public class AppController {
 		model.addAttribute("users", users);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "userslist";
-	}
+	}*/
 	/**
-	 * This method will provide the medium to add a new user.
+	 * 
 	 */
+        /*
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
 		User user = new User();
@@ -249,11 +430,11 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "registration";
 	}
-
+        */
 	/**
-	 * This method will be called on form submission, handling POST request for
-	 * saving user in database. It also validates the user input
+	 * 
 	 */
+        /*
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result,
 			ModelMap model) {
@@ -270,6 +451,7 @@ public class AppController {
 		 * framework as well while still using internationalized messages.
 		 * 
 		 */
+        /*
 		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
 			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
 		    result.addError(ssoError);
@@ -284,9 +466,11 @@ public class AppController {
 		return "registrationsuccess";
 	}
 
+        */
 	/**
-	 * This method will provide the medium to update an existing user.
+	 * 
 	 */
+        /*
 	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.GET)
 	public String editUser(@PathVariable String ssoId, ModelMap model) {
 		User user = userService.findBySSO(ssoId);
@@ -294,16 +478,15 @@ public class AppController {
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "registration";
-	}
-	
-	/**
+	}*/
+               	/**
 	 * This method will be called on form submission, handling POST request for
 	 * updating user in database. It also validates the user input
 	 */
 	@RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
 	public String updateUser(@Valid User user, BindingResult result,
 			ModelMap model, @PathVariable String ssoId) {
-
+                        
 		if (result.hasErrors()) {
 			return "registration";
 		}
@@ -322,6 +505,7 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "registrationsuccess";
 	}
+	
 
 	
 	/**
