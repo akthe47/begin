@@ -1,0 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mind.ak47.begin.service;
+
+
+import com.mind.ak47.begin.model.Typedoc;
+import java.util.List;
+
+/**
+ *
+ * @author ak47@minduos
+ */
+public interface TypedocService {
+    
+    Typedoc findById(int id);
+	
+	void save(Typedoc mela);
+	
+	void deleteById(int id);
+	
+	List<Typedoc> findAll();
+
+    
+}

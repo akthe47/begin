@@ -10,7 +10,19 @@ package com.mind.ak47.begin.configuration;
  * @author ak47@minduos
  */
 
+
+import com.mind.ak47.begin.converter.CodeClientToClient;
+import com.mind.ak47.begin.converter.CodeClientToClientP;
+import com.mind.ak47.begin.converter.CodeClientToClientPu;
+import com.mind.ak47.begin.converter.CodeClientToClientSociete;
+import com.mind.ak47.begin.converter.CodeProjetToProjet;
+import com.mind.ak47.begin.converter.CodeProjetToProjetPrive;
+import com.mind.ak47.begin.converter.CodeProjetToProjetPublic;
+import com.mind.ak47.begin.converter.CodeTypedocToTypedoc;
 import com.mind.ak47.begin.converter.CodeVilleToVille;
+import com.mind.ak47.begin.converter.CodefactTofact;
+import com.mind.ak47.begin.converter.CodemTomem;
+import com.mind.ak47.begin.converter.ModeToModePaiement;
 import com.mind.ak47.begin.converter.RoleToUserProfileConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -26,8 +38,10 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.mind.ak47.begin.converter.RoleToUserProfileConverter;
+import java.io.IOException;
 
 
 @Configuration
@@ -40,7 +54,29 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	@Autowired
 	       CodeVilleToVille codevtov;
-
+        @Autowired
+        CodeClientToClientP codecltoclp;
+        @Autowired
+        CodeClientToClientSociete codecltocls;
+        @Autowired
+        CodeClientToClientPu codecltoclpu;
+        @Autowired
+        CodeClientToClient codecltocl;
+        @Autowired
+        CodeProjetToProjet codeprtopr;
+        @Autowired
+        CodeTypedocToTypedoc codettot;
+        @Autowired
+        CodeProjetToProjetPublic codeptopu;
+        @Autowired
+        CodeProjetToProjetPrive codeptopr;
+        @Autowired
+        ModeToModePaiement modetomodep;
+        @Autowired
+        CodemTomem cmemtomem;
+        @Autowired
+        CodefactTofact cftof;
+        
 	/**
      * Configure ViewResolvers to deliver preferred views.
      */
@@ -70,7 +106,59 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(roleToUserProfileConverter);
         registry.addConverter(codevtov);
+        registry.addConverter(codettot);
+        registry.addConverter(modetomodep);
+        
+        
+        //registry.addConverter(codecltoclp);
+        //registry.addConverter(codecltocls);
+        //registry.addConverter(codecltoclpu);
+        
+        
+        registry.addConverter(codecltocl);
+        registry.addConverter(codeprtopr);
+        
+        /*documet*/
+        
+        
+        /*si j'élimne ca les factures les bons de commandes et les contrats ne fonctionnent pas et si je les laisse les projets public et privé ne fonctionnent pas*/
+        /*registry.addConverter(codeptopu);    
+        registry.addConverter(codeptopr);*/
+        /*memcontfactbc*/
+        
+        /* si j'elimine ca les paiements ne fonctionnent pas et je les laisse les factures et les memoires ne fonctionnent pas*/
+        registry.addConverter(cmemtomem);
+        registry.addConverter(cftof);
+        
     }
+    /*public void addFormatters1(FormatterRegistry registry) {
+        registry.addConverter(roleToUserProfileConverter);
+        registry.addConverter(codevtov);
+        registry.addConverter(codettot);
+        registry.addConverter(modetomodep);
+        
+        
+        //registry.addConverter(codecltoclp);
+        //registry.addConverter(codecltocls);
+        //registry.addConverter(codecltoclpu);
+        
+        
+        registry.addConverter(codecltocl);
+        registry.addConverter(codeprtopr);
+        
+        //documet
+        
+        
+        //si j'élimne ca les factures les bons de commandes et les contrats ne fonctionnent pas et si je les laisse les projets public et privé ne fonctionnent pas
+        registry.addConverter(codeptopu);    
+        registry.addConverter(codeptopr);
+        //memcontfactbc
+        
+        // si j'elimine ca les paiements ne fonctionnent pas et je les laisse les factures et les memoires ne fonctionnent pas
+        registry.addConverter(cmemtomem);
+        registry.addConverter(cftof);
+        
+    }*/
 	
 
     /**
@@ -83,6 +171,18 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	    return messageSource;
 	}
     
+    @Bean(name="multipartResolver") 
+    public CommonsMultipartResolver getResolver() throws IOException{
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+         
+        //Set the maximum allowed size (in bytes) for each individual file.
+        resolver.setMaxUploadSizePerFile(5242880);//5MB
+         
+        //You may also set other available properties.
+         
+        return resolver;
+    
+    }
     /**Optional. It's only required when handling '.' in @PathVariables which otherwise ignore everything after last '.' in @PathVaidables argument.
      * It's a known bug in Spring [https://jira.spring.io/browse/SPR-6164], still present in Spring 4.1.7.
      * This is a workaround for this issue.

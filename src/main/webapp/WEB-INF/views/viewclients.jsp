@@ -18,131 +18,40 @@
                 <!-- END BREADCRUMB -->
                 
                 <!-- PAGE CONTENT WRAPPER -->
-                <span>${sss}</span>
+                <span></span>
                 <div class="page-content-wrap">
                 <form:form method="POST" modelAttribute="client" class="form-horizontal">
                     <div class="row">
                         <div class="col-md-12">
                             
-                            <form class="form-horizontal">
+                            
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><strong>Client</strong> ${aaa}</h3>
+                                    <h3 class="panel-title"><strong>Client</strong></h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
                                     </ul>
                                 </div>
                                 
                                 <div class="panel-body">                                                                        
-                                    
+                                   
                                     <div class="form-group">
                                         <label class="col-md-3 col-xs-12 control-label">code</label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-ban"></span></span>
+                                                <c:if test="${type==1||type==3}">
                                                 <form:input type="number" path="code" id="code" class="form-control"  disabled="true"  />
-                                                <form:input type="hidden" path="code" id="code"/>
-                                            </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
-                                        </div>
-                                    </div>
-                                                <c:if test="${h < 3}">
-                                    <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">nom</label>
-                                        <div class="col-md-6 col-xs-12">                                            
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                <c:choose>
-							<c:when test="${type==1}">
-                                                        <input type="text"  class="form-control"  disabled="true"  value="${client.nom}"/>
-                                                        </c:when>
-							<c:otherwise>
-                                                        <form:input type="text" path="nom" id="nom" class="form-control"  value="${client.nom}"/>
-                                                        </c:otherwise>
-                                                </c:choose>
-                                            </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
-                                        </div>
-                                    </div>
+                                                
                                                 </c:if>
-                                    <c:if test="${h == 2}"> 
-                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">prenom</label>
-                                        <div class="col-md-6 col-xs-12">                                            
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                 <c:choose>
-							<c:when test="${type==1}">
-                                                        <input type="text"  class="form-control"  disabled="true"  value="${client.prenom}"/>
-                                                        </c:when>
-							<c:otherwise>
-                                                            <form:input type="text" path="prenom" id="prenom" class="form-control" value="${client.prenom}"/>
-                                                        </c:otherwise>
-                                                </c:choose>
+                                                
+                                                <form:input type="hidden" path="code" id="code" />
                                                 
                                             </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
+                                            
                                         </div>
                                     </div>
-                                    
-                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">cin</label>
-                                        <div class="col-md-6 col-xs-12">                                            
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                 <c:choose>
-							<c:when test="${type==1}">
-                                                        <input type="text"  class="form-control"  disabled="true" value="${client.cin}"/>
-                                                        </c:when>
-							<c:otherwise>
-                                                            <form:input type="number" path="cin" id="cin" class="form-control"   value="${client.cin}"/>
-                                                        </c:otherwise>
-                                                </c:choose>
-                                                
-                                            </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
-                                        </div>
-                                    </div>
-                                    </c:if>
-                                    <c:if test="${h == 3}"> 
-                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Raison sociale</label>
-                                        <div class="col-md-6 col-xs-12">                                            
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                <c:choose>
-							<c:when test="${type==1}">
-                                                        <input type="text"  class="form-control"  disabled="true"  value="${client.raisonSociale}"/>
-                                                        </c:when>
-							<c:otherwise>
-                                                            <form:input type="text" path="raisonSociale" id="raisonSociale" class="form-control"  />
-                                                        </c:otherwise>
-                                                </c:choose>
                                                
-                                            </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
-                                        </div>
-                                    </div>
-                                    
-                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Matricule fiscale</label>
-                                        <div class="col-md-6 col-xs-12">                                            
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                 <c:choose>
-							<c:when test="${type==1}">
-                                                        <input type="text" class="form-control" disabled="true" value="${client.matricule}"/>
-                                                        </c:when>
-							<c:otherwise>
-                                                        <form:input type="text" path="matricule" id="matricule" class="form-control" value="${client.matricule}"/>
-                                                        </c:otherwise>
-                                                </c:choose>    
-                                                
-                                            </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
-                                        </div>
-                                    </div>
-                                    </c:if>
                                     <div class="form-group">
                                         <label class="col-md-3 col-xs-12 control-label">Adresse</label>
                                         <div class="col-md-6 col-xs-12">
@@ -155,7 +64,7 @@
                                                         </c:otherwise>
                                                 </c:choose>                                            
                                             
-                                            <span class="help-block">Default textarea field</span>
+                                            
                                         </div>
                                     </div>
                                     
@@ -169,12 +78,14 @@
                                                         <input type="text" class="form-control"  disabled="true" value="${client.getMail()}"/>
                                                         </c:when>
 							<c:otherwise>
-                                                            <form:input type="text" path="mail" id="mail" class="form-control" value="${client.getMail()}"/>
+                                                            <form:input path="mail" id="mail" class="form-control" />
                                                         </c:otherwise>
                                                 </c:choose>    
                                                 
                                             </div>                                            
-                                            <span class="help-block">This is sample of text field</span>
+                                            <span class="help-block"><div class="has-error">
+							<form:errors path="mail" class="help-inline"/>
+						</div></span>
                                         </div>
                                     </div>
                                             
@@ -219,9 +130,115 @@
                                             <span class="help-block">This is sample of text field</span>
                                         </div>
                                     </div> 
+                                     <c:if test="${h < 3}">
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">nom</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                <c:choose>
+							<c:when test="${type==1}">
+                                                        <input type="text"  class="form-control"  disabled="true"  value="${client.nom}"/>
+                                                        </c:when>
+							<c:otherwise>
+                                                        <form:input path="nom" id="nom" class="form-control"  />
+                                                        </c:otherwise>
+                                                </c:choose>
+                                            </div>                                            
+                                            <span class="help-block"><div class="has-error">
+							<form:errors path="nom" class="help-inline"/>
+						</div></span>
+                                        </div>
+                                    </div>
+                                                </c:if>
+                                    <c:if test="${h == 2}"> 
+                                     <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">prenom</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                 <c:choose>
+							<c:when test="${type==1}">
+                                                        <input type="text"  class="form-control"  disabled="true"  value="${client.prenom}"/>
+                                                        </c:when>
+							<c:otherwise>
+                                                            <form:input path="prenom" id="prenom" class="form-control" />
+                                                        </c:otherwise>
+                                                </c:choose>
+                                                
+                                            </div>                                            
+                                            <span class="help-block"><div class="has-error">
+							<form:errors path="prenom" class="help-inline"/>
+						</div></span>
+                                        </div>
+                                    </div>
                                     
+                                     <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">cin</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                 <c:choose>
+							<c:when test="${type==1}">
+                                                        <input type="text"  class="form-control"  disabled="true" value="${client.cin}"/>
+                                                        </c:when>
+							<c:otherwise>
+                                                            <form:input  path="cin" id="cin" class="mask_cin form-control"  />
+                                                        </c:otherwise>
+                                                </c:choose>
+                                                
+                                            </div>                                            
+                                            <span class="help-block">T<div class="has-error">
+							<form:errors path="cin" class="help-inline"/>
+						</div></span>
+                                        </div>
+                                    </div>
+                                    </c:if>
+                                    <c:if test="${h == 3}"> 
+                                     <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Raison sociale</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                <c:choose>
+							<c:when test="${type==1}">
+                                                        <input type="text"  class="form-control"  disabled="true"  value="${client.raisonSociale}"/>
+                                                        </c:when>
+							<c:otherwise>
+                                                            <form:input path="raisonSociale" id="raisonSociale" class="form-control"  />
+                                                        </c:otherwise>
+                                                </c:choose>
+                                               
+                                            </div>                                            
+                                            <span class="help-block"><div class="has-error">
+							<form:errors path="raisonSociale" class="help-inline"/>
+						</div></span>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">Matricule fiscale</label>
+                                        <div class="col-md-6 col-xs-12">                                            
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                 <c:choose>
+							<c:when test="${type==1}">
+                                                        <input type="text" class="form-control" disabled="true" value="${client.matricule}"/>
+                                                        </c:when>
+							<c:otherwise>
+                                                        <form:input  path="matricule" id="matricule" class="form-control" />
+                                                        </c:otherwise>
+                                                </c:choose>    
+                                                
+                                            </div>                                            
+                                            <span class="help-block"><div class="has-error">
+							<form:errors path="matricule" class="help-inline"/>
+						</div></span>
+                                        </div>
+                                    </div>
+                                    </c:if>
                                 <div class="panel-footer">
-                                    <button class="btn btn-default">Retour</button>     
+                                    <a href="<c:url value="/listcl"/>" class="btn btn-default">Retour</a>     
                                     <input type="submit" class="btn btn-primary pull-right" value="Enregistrer" />
                                 </div>
                                 
@@ -229,10 +246,12 @@
                             
                             
                         </div>
+                           
                     </div>                    
                     
                 </div>
-                                        </form:form>
+                   </form:form>                      
                 <!-- END PAGE CONTENT WRAPPER -->
-
+                </div>
 <%@include file="dashf.jsp" %>
+<%@include file="dashfe.jsp" %>

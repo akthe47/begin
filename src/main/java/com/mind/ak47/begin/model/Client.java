@@ -6,6 +6,7 @@
 package com.mind.ak47.begin.model;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,18 +33,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Client implements Serializable {
 
-    
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code",nullable=false)
+    @Basic(optional = false)
+    @Column(name = "code")
     private Integer code;
     
-    @NotEmpty
-    @Column(name = "adresse",nullable=false)
+    @Basic(optional = false)
+    @Column(name = "adresse")
     private String adresse;
     
-    @NotEmpty
-    @Column(name = "mail",nullable=false)
+    @Basic(optional = false)
+    @Column(name = "mail")
     private String mail;
     
      @ManyToOne(fetch = FetchType.LAZY)
@@ -51,7 +53,8 @@ public abstract class Client implements Serializable {
     private Ville codeville;
    
 
-    
+    public Client(){
+    }
     public Integer getCode() {
         return code;
     }
@@ -100,9 +103,9 @@ public abstract class Client implements Serializable {
         return true;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "com.mind.ak47.begin.model.Client[ code=" + code + " ]";
-    }
+    }*/
     
 }

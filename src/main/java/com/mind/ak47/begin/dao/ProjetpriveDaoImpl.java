@@ -5,7 +5,9 @@
  */
 package com.mind.ak47.begin.dao;
 
-import com.mind.ak47.begin.model.ProjetPK;
+import com.mind.ak47.begin.model.Client;
+import com.mind.ak47.begin.model.ClientP;
+import com.mind.ak47.begin.model.ClientSociete;
 import com.mind.ak47.begin.model.Projetprive;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -21,15 +23,22 @@ import org.springframework.stereotype.Repository;
  * @author ak47@minduos
  */
 @Repository("projetpriveDao")
-public class ProjetpriveDaoImpl extends AbstractDao<ProjetPK, Projetprive> implements ProjetpriveDao{
+public class ProjetpriveDaoImpl extends AbstractDao<Integer, Projetprive> implements ProjetpriveDao{
     
     static final Logger logger = LoggerFactory.getLogger(ProjetpriveDaoImpl.class);
-    public Projetprive findById(int id,short ida) {
-                ProjetPK pk=new ProjetPK(ida, id);
-		Projetprive projetprive = getByKey(pk);
-                /*if(projetprive!=null){
-			Hibernate.initialize(projetprive.getCodeville());
-		}*/
+    public Projetprive findById(int id) {
+                
+		Projetprive projetprive = getByKey(id);
+                if(projetprive!=null){
+                    Client c=projetprive.getCodeclient();
+                    if (c instanceof ClientP) {
+                        ClientP ci=(ClientP)c;
+			Hibernate.initialize(ci);}else
+                    {
+                    ClientSociete ci=(ClientSociete)c;
+			Hibernate.initialize(ci);
+                    }
+		}
 		
 		return projetprive;
 	}
@@ -42,15 +51,36 @@ public class ProjetpriveDaoImpl extends AbstractDao<ProjetPK, Projetprive> imple
 		Projetprive projetprive = (Projetprive)crit.uniqueResult();
 		delete(projetprive);
 	}
+    //static final Logger logger = LoggerFactory.getLogger(MemoireDaoImpl.class);
+    public List<Projetprive> findBypr(int p){
+                logger.info("codeprojet : {}", p);
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("codeclient.code", p));
+		List<Projetprive> docs = (List<Projetprive>)crit.list();
+		 /*for(Memoire doc : docs){
+			Hibernate.initialize(doc.getType());
+		}*/
+		return docs;
+        
+        }
     public List<Projetprive> findAllProjetprive() {
 		Criteria criteria = createEntityCriteria();
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
 		List<Projetprive> projetprives = (List<Projetprive>) criteria.list();
 		
-		/*
+		
 		for(Projetprive projetprive : projetprives){
-			Hibernate.initialize(projetprive.getCodeville());
-		}*/
+			if(projetprive!=null){
+                    Client c=projetprive.getCodeclient();
+                    if (c instanceof ClientP) {
+                        ClientP ci=(ClientP)c;
+			Hibernate.initialize(ci);}else
+                    {
+                    ClientSociete ci=(ClientSociete)c;
+			Hibernate.initialize(ci);
+                    }
+		}
+		}
 		return projetprives;
 	}
     

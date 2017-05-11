@@ -28,17 +28,18 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "client_public")
-@PrimaryKeyJoinColumn(name = "code")
+//@PrimaryKeyJoinColumn(name = "code", referencedColumnName = "code")
 public class ClientPublic extends Client {
 
-    
     @NotEmpty
+    @Basic(optional = false)
     @Column(name = "nom")
     private String nom;
     
 
 
     public ClientPublic() {
+        //super();
     }
 
 

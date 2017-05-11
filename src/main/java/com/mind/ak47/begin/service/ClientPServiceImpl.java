@@ -26,7 +26,7 @@ public class ClientPServiceImpl implements ClientPService{
         public ClientP findById(int id){return dao.findById(id);}
 	
 	public void save(ClientP client){dao.save(client);}
-	
+	public ClientP findBycin(String p){return dao.findBycin(p);}
 	public void deleteById(int id){dao.deleteById(id);}
         public void update(ClientP client) {
             

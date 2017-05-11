@@ -81,14 +81,15 @@ $(function() {
         //Masked Inputs
         var feMasked = function(){            
             if($("input[class^='mask_']").length > 0){
-                $("input.mask_tin").mask('99-9999999');
+                $("input.mask_cin").mask('99999999');
                 $("input.mask_ssn").mask('999-99-9999');        
-                $("input.mask_date").mask('9999-99-99');
+                $("input.mask_date").mask('99-99-9999');
                 $("input.mask_product").mask('a*-999-a999');
-                $("input.mask_phone").mask('99 (999) 999-99-99');
+                $("input.mask_phone").mask('99999999');
                 $("input.mask_phone_ext").mask('99 (999) 999-9999? x99999');
                 $("input.mask_credit").mask('9999-9999-9999-9999');        
-                $("input.mask_percent").mask('99%');
+                $("input.mask_percent").mask('99');
+                //$("input.mask_mail").mask("a-zA-Z0-9*********.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/");
             }            
         }//END Masked Inputs
         
@@ -635,3 +636,26 @@ Object.size = function(obj) {
     }
     return size;
 };
+function calcule_ht_ttc(event) // fonction de calcul
+{
+	var prix_ht = $('input[name="mthtva"]').val();
+	var taux_tva  = $('input[name="ptva"]').val();
+	var prix_ttc = $('input[name="mtttc"]').val();
+	
+	if(event.target.name=='mtttc')
+	{
+		var new_prix_ht = (prix_ttc/(1+taux_tva/100)).toFixed(2);		
+		$('input[name="mthtva"]').val(new_prix_ht);
+	}
+	else
+	{
+		var new_prix_ttc = (prix_ht*(1+taux_tva/100)).toFixed(2);		
+		$('input[name="mtttc"]').val(new_prix_ttc);
+	}	
+}
+
+
+$(function() // jQuery
+{
+	$('.myForm input').bind('keyup mouseup', calcule_ht_ttc); // appel de la fonction de calcul lors d'un événement 'keyup' ou 'mouseup'
+});

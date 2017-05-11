@@ -17,7 +17,7 @@ public interface ClientPDao {
     ClientP findById(int id);
 	
 	void save(ClientP client);
-	
+	public ClientP findBycin(String p);
 	void deleteById(int id);
 	
 	List<ClientP> findAllClient();

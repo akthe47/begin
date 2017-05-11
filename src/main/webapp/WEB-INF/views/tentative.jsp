@@ -4,4 +4,5 @@
     Author     : ak47@minduos
 --%>
 <%@include file="dashh.jsp" %>
+${sss}
 <%@include file="dashf.jsp" %>

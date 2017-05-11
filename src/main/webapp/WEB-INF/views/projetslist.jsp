@@ -16,7 +16,7 @@
 
                 <!-- PAGE TITLE -->
                 <div class="page-title">                    
-                    <h2><span class="fa fa-arrow-circle-o-left"></span> Sortable Tables</h2>
+                    <h2><span class="fa fa-arrow-circle-o-left"></span>Table Projets</h2>
                 </div>
                 <!-- END PAGE TITLE -->                
 
@@ -50,7 +50,7 @@
                                                 <c:if test="${not empty projetpu}" >
                                                     <c:forEach items="${projetpu}" var="projet">
                                                 <tr>
-                                                    <td>PU ${projet.getProjetPK().getAnnee()} / ${projet.getProjetPK().getCode()}</td>
+                                                    <td>PU/ ${projet.getCode()}</td>
                                                     <td>${projet.codeclient.getCode()}</td>
                                                     <td>${projet.adresse}</td>
                                                     <td>${projet.description}</td>
@@ -59,15 +59,15 @@
                                                     <td>${projet.personneacontacter}</td>
                                                     <td>${projet.numtel}</td>
                                                     <td>${projet.maitreouvrage}</td>
-                                                    <td>${projet.montatnttravaux}</td>
-                                                    <td><a href="<c:url value='/viewpu-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/suppu-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
+                                                    <td><fmt:formatNumber type="number" groupingUsed="false" value="${projet.montanttravaux}"/></td>
+                                                    <td><a href="<c:url value='/viewpu-projet-${projet.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-projet-${projet.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/suppu-projet-${projet.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                                 </tr>
                                                     </c:forEach>
                                                 </c:if>
                                                 <c:if test="${not empty projetpr}" >
                                                     <c:forEach items="${projetpr}" var="projet">
                                                 <tr>
-                                                    <td>PR ${projet.getProjetPK().getAnnee()} / ${projet.getProjetPK().getCode()}</td>
+                                                    <td>PR/ ${projet.getCode()}</td>
                                                     <td>${projet.codeclient.getCode()}</td>
                                                     <td>${projet.adresse}</td>
                                                     <td>${projet.description}</td>
@@ -76,8 +76,8 @@
                                                     <td>${projet.personneacontacter}</td>
                                                     <td>${projet.numtel}</td>
                                                     <td>${projet.maitreouvrage}</td>
-                                                    <td><fmt:formatNumber type="number" groupingUsed="false" value="${projet.montatnttravaux}" /></td>
-                                                    <td><a href="<c:url value='/viewpr-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppr-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/suppr-projet-${projet.getProjetPK().getAnnee()}-${projet.getProjetPK().getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
+                                                    <td><fmt:formatNumber type="number" groupingUsed="false" value="${projet.montanttravaux}" /></td>
+                                                    <td><a href="<c:url value='/viewpr-projet-${projet.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppr-projet-${projet.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/suppr-projet-${projet.getCode()}' />" class="btn btn-danger btn-sm btn-block">Supprimer</a></td>
                                                 </tr>
                                                     </c:forEach>
                                                 </c:if>
@@ -92,11 +92,17 @@
                           
 					                                             
                             </div>
-
+                        
+                        
                         </div>
-						
+				<div class="row">
+                         
+                            <center><a href="<c:url value='/addpu-projet' />" class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau projet Public</a> <a href="<c:url value='/addp-projet' />" class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau projet Privé</a></center>
+                            
+                        </div>		
                 </div>
 						
                     
                 
-<%@include file="dashf.jsp" %>				
+<%@include file="dashf.jsp" %>
+<%@include file="dashfe.jsp" %>

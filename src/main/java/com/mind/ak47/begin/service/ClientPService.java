@@ -17,6 +17,7 @@ public interface ClientPService {
 	void save(ClientP client);
 	
 	void deleteById(int id);
+        public ClientP findBycin(String p);
 	public void update(ClientP client);
 	List<ClientP> findAllClient();
     

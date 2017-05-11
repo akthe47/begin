@@ -33,6 +33,18 @@ static final Logger logger = LoggerFactory.getLogger(ClientPDaoImpl.class);
     public void save(ClientP client) {
 		persist(client);
 	}
+    //static final Logger logger = LoggerFactory.getLogger(BonCommandeDaoImpl.class);
+    public ClientP findBycin(String p){
+                logger.info("cin : {}", p);
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("cin", p));
+		ClientP docs = (ClientP)crit.uniqueResult();
+		 /*for(Document doc : docs){
+			Hibernate.initialize(doc.getType());
+		}*/
+		return docs;
+        
+        }
     public void deleteById(int id) {
 		Criteria crit = createEntityCriteria();
 		crit.add(Restrictions.eq("code", id));

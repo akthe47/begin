@@ -7,10 +7,12 @@
 	<title>AccessDenied page</title>
 </head>
 <body>
-	<div class="generic-container">
-		<div class="authbar">
-			<span>Dear <strong>${loggedinuser}</strong>, You are not authorized to access this page.</span> <span class="floatRight"><a href="<c:url value="/logout" />">Logout</a></span>
+	<div class="page-container">
+            <div <!--class=""--> >
+			<span>M(Me). <strong>${loggedinuser}</strong>, Vous n'êtes pas authorisé a voir le contenu de cette page.</span> <span class="floatRight"><a href="<c:url value="/logout" />">Se déconnecter</a></span>
 		</div>
+                
+                <img class="page-content" src="<c:url value='/img/better-accessed-denied-01.png' />" />
 	</div>
 </body>
 </html>

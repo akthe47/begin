@@ -53,18 +53,19 @@
         <script type='text/javascript' src='<c:url value="/js/plugins/maskedinput/jquery.maskedinput.min.js" />'></script>
 		
 
-        <script type="text/javascript" src='<c:url value="/js/plugins/bootstrap/bootstrap-timepicker.min." />'></script>
+        <script type="text/javascript" src='<c:url value="/js/plugins/bootstrap/bootstrap-timepicker.min.js" />'></script>
         <script type="text/javascript" src='<c:url value="/js/plugins/bootstrap/bootstrap-file-input.js" />'></script>
 
         <script type="text/javascript" src='<c:url value="/js/plugins/tagsinput/jquery.tagsinput.min.js" />'></script>
+        <script type="text/javascript" src='<c:url value="/js/plugins/fileinput/fileinput.min.js" />'></script>
         <!-- END PAGE PLUGINS -->
 
         <!-- START TEMPLATE -->
-         <script type="text/javascript" src='<c:url value="js/settings.js" />'></script> 
+         <script type="text/javascript" src='<c:url value="/js/settings.js" />'></script> 
         
         <script type="text/javascript" src='<c:url value="/js/plugins.js" />'></script>        
         <script type="text/javascript" src='<c:url value="/js/actions.js" />'></script>        
         <!-- END TEMPLATE -->
+        <script type="text/javascript" src='<c:url value="/js/demo_file_handling.js" />'></script>
     <!-- END SCRIPTS -->        
-    </body>
-</html>
+   

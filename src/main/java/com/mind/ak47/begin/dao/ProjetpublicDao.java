@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.mind.ak47.begin.dao;
+import com.mind.ak47.begin.model.Client;
 import com.mind.ak47.begin.model.Projetpublic;
 import java.util.List;
 /**
@@ -11,10 +12,10 @@ import java.util.List;
  * @author ak47@minduos
  */
 public interface ProjetpublicDao {
-     Projetpublic findById(int id,short ida);
+     Projetpublic findById(int id);
 	
 	void save(Projetpublic projetpublic);
-	
+	public List<Projetpublic> findBypr(int p);
 	void deleteById(int id);
 	
 	List<Projetpublic> findAllProjetpublic();

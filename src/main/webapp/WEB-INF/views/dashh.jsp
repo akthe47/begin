@@ -6,12 +6,12 @@
 
 
 
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>        
         <!-- META SECTION -->
-        <title>CNA - Clients</title>            
+        <title>CNA </title>            
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
@@ -31,56 +31,65 @@
                 <!-- START X-NAVIGATION -->
                 <ul class="x-navigation">
                     <li class="xn-logo">
-                        <a href="index.html">CNA</a>
+                        <a href="">CNA</a>
                         <a href="#" class="x-navigation-control"></a>
                     </li>
                     
-                    <li class="xn-title"><center>Navigation</center></li>                    
+                    <li class="xn-title"><center>Navigation</center></li>   
+                <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
 							<li>
 							<a href="<c:url value='/listcl' />"><span class="fa fa-user"></span><span class="xn-text">Clients</span></a>
 							</li>
-                    <li class="xn-openable">
-                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Projets</span></a>
-                        <ul>
-                            <li><a href="<c:url value='/listpr' />"><span class="fa fa-image"></span> Consulter et Gérer</a></li>
-                            <li><a href="pages-invoice.html"><span class="fa fa-dollar"></span> Statistics</a></li>
+                                                        </sec:authorize>
                                                         
-                        </ul>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Projets</span></a>
+                                <ul>
+                            <li><a href="<c:url value='/listpr' />"><span class="fa fa-image"></span> Consulter et Gérer</a></li>
+                            <!--<li><a href="pages-invoice.html"><span class="fa fa-dollar"></span> Statistics</a></li>-->
+                                                        
+                                </ul>
 					</li>
+                                        <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
 					<li class="xn-openable">
 						<a href="#"><span class="glyphicon glyphicon-book"></span> <span class="xn-text">Contrats</span></a>
 						<ul>	
-							<li><a href="templatecontrath.html"><span class="glyphicon glyphicon-book"></span>Contrats d'honoraires</a></li>
-							<li><a href="templatecontrath.html"><span class="glyphicon glyphicon-bold"></span>Bon de commandes</a></li>
-							<li><a href="templatecontrath.html"><span class="fa fa-font"></span>Avenant</a></li>
+							<li><a href="<c:url value='/viewcparpr' />"><span class="glyphicon glyphicon-book"></span>Contrats d'honoraires</a></li>
+							<li><a href="<c:url value='/viewbcparpr' />"><span class="glyphicon glyphicon-bold"></span>Bon de commandes</a></li>
+							<li><a href="<c:url value='/listpr' />"><span class="fa fa-font"></span>Avenant</a></li>
 						</ul>
 					</li>
+                                        </sec:authorize>
+                                        <sec:authorize access="hasRole('ADMIN')">
 					<li class="xn-openable">
 						<a href="#"><span class="fa fa-clipboard"></span> <span class="xn-text">Facturations</span></a>
 						<ul>	
-							<li><a href="templateclients.html"><span class="fa fa-clipboard"></span>Mémoires d'honoraires</a></li>
-							<li><a href="templateclients.html"><span class="fa fa-clipboard"></span>Factures</a></li>
+							<li><a href="<c:url value='/viewmparpr' />"><span class="fa fa-clipboard"></span>Mémoires d'honoraires</a></li>
+							<li><a href="<c:url value='/viewfparpr' />"><span class="fa fa-clipboard"></span>Factures</a></li>
 						</ul>
 					</li>
+                                        
 					<li class="xn-openable">
 						<a href="#"><span class="fa fa-usd"></span> <span class="xn-text">Réglements</span></a>
 						<ul>	
-							<li><a href="templateclients.html"><span class="fa fa-usd"></span>Payements</a></li>
-							<li><a href="templateclients.html"><span class="fa fa-sign-in"></span>Retenus à la sources</a></li>
+							<li><a href="<c:url value='/listpay' />"><span class="fa fa-usd"></span>Payements</a></li>
+							<!--<li><a href="templateclients.html"><span class="fa fa-sign-in"></span>Retenus à la sources</a></li>-->
 						</ul>
 					</li>
-					<li class="xn-openable">
+					<!--<li class="xn-openable">
                                 <a href="#"><span class="fa fa-envelope"></span><span class="xn-text"> Les bordereaux d'envois</span></a>
                                 <ul>
 									<li><a href="pages-mailbox-compose.html"><span class="fa fa-pencil"></span> Créer envoi</a></li>
                                     <li><a href="pages-mailbox-inbox.html"><span class="fa fa-inbox"></span> Bordereaux envoyés</a></li> 
                                 </ul>
-                    </li>
+                    </li>-->
+                                        
 					<li class="xn-openable">
                                 <a href="#"><span class="fa fa-key"></span><span class="xn-text"> Gestion des comptes</span></a>
                                 <ul>
                                     <li><a href="<c:url value='/list' />"><span class="fa fa-inbox"></span> Utilistaeurs</a></li> 
                                 </ul>
+                                
                     </li>
 					<li class="xn-openable active">
                                 <a href="#"><span class="fa fa-wrench"></span><span class="xn-text"> Options</span></a>
@@ -94,7 +103,9 @@
                                     <li><a href="pages-mailbox-inbox.html"><span class="fa fa-inbox"></span> par ?</a></li> 
                                 </ul>
                     </li>
-                </ul>    
+                    </sec:authorize>
+                </ul>  
+                
                 <!-- END X-NAVIGATION -->
             </div>
             <!-- END PAGE SIDEBAR -->
@@ -109,12 +120,12 @@
                         <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
                     </li>
                     <!-- END TOGGLE NAVIGATION -->
-                    <!-- SEARCH -->
+                    <!-- SEARCH 
                     <li class="xn-search">
                         <form role="form">
                             <input type="text" name="search" placeholder="Search..."/>
                         </form>
-                    </li>   
+                    </li>   -->
                     <!-- END SEARCH -->
                     <!-- POWER OFF -->
                     <li class="xn-icon-button pull-right last">
@@ -126,9 +137,10 @@
                     </li> 
                     <!-- END POWER OFF -->
                     <!-- MESSAGES -->
+                    <sec:authorize access="hasRole('ADMIN')">
                     <li class="xn-icon-button pull-right">
                         <a href="#"><span class="fa fa-comments"></span></a>
-                        <div class="informer informer-danger">1</div>
+                        <div class="informer informer-danger">R</div>
                         <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><span class="fa fa-comments"></span> Messages</h3>                                
@@ -153,7 +165,7 @@
                     <!-- TASKS -->
                     <li class="xn-icon-button pull-right">
                         <a href="#"><span class="fa fa-tasks"></span></a>
-                        <div class="informer informer-warning">1</div>
+                        <div class="informer informer-warning">R</div>
                         <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><span class="fa fa-tasks"></span> Tasks</h3>                                
@@ -196,6 +208,7 @@
                             </div>                            
                         </div>                        
                     </li>
+                    </sec:authorize>
                     <!-- END TASKS -->
                     
                 </ul>

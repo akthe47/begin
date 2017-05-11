@@ -1,0 +1,31 @@
+https://remmm.revues.org/8449
+http://www.royalark.net/Tunisia/tunisia.htm
+
+
+
+
+
+http://www.jqueryscript.net/tags.php?/image%20viewer/
+http://www.designyourway.net/drb/a-list-of-jquery-pdf-viewers-available-at-the-moment/
+
+
+
+sss=clientP - Failed to convert property value of type 
+%5Bjava.lang.String%5D to required type %5Bcom.mind.ak47.begin.model.Ville%5D 
+for property %27codeville%27%3B nested exception is java.lang.IllegalStateException%3A 
+
+Cannot convert value of type %5Bjava.lang.String%5D to required type %5Bcom.mind.ak47.begin.model.Ville%5D for property %27codeville%27%3A 
+no matching editors or conversion strategy found
+
+{ y: 'Janvier' , a: '12', b: '13' }
+{ y: 'Fevrier' , a: '${montantf.f2}', b: '${montantp.p2}' },
+            { y: 'Mars' , a: '${montantf.f3}', b: '${montantp.p3}' },
+            { y: 'Avril' , a: '${montantf.f4}', b: '${montantp.p4}' },
+            { y: 'Mai' , a: '${montantf.f5}', b: '${montantp.p5}' },
+            { y: 'Juin' , a: '${montantf.f6}', b: '${montantp.p6}' },
+            { y: 'Juillet' , a: '${montantf.f7}', b: '${montantp.p7}' },
+            { y: 'Aout' , a: '${montantf.f8}', b: '${montantp.p8}' },
+            { y: 'Septembre' , a: '${montantf.f9}', b: '${montantp.p9}' },
+            { y: 'Octobre' , a: '${montantf.f10}', b: '${montantp.p10}' },
+            { y: 'Novembre' , a: '${montantf.f11}', b: '${montantp.p11}' },
+            { y: 'Decembre' , a: '${montantf.f12}', b: '${montantp.p12}' }

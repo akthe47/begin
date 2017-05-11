@@ -27,6 +27,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "client_pp")
+//@PrimaryKeyJoinColumn(name = "code", referencedColumnName = "code")
 public class ClientP extends Client {
     
     
@@ -37,11 +38,13 @@ public class ClientP extends Client {
     @NotEmpty
     @Column(name = "prenom")
     private String prenom;
-    @NotNull
+    @NotEmpty
+    @Basic(optional = false)
     @Column(name = "cin")
-    private int cin;
+    private String cin;
     
         public ClientP() {
+            //super();
     }
 
 
@@ -61,11 +64,11 @@ public class ClientP extends Client {
         this.prenom = prenom;
     }
 
-    public int getCin() {
+    public String getCin() {
         return cin;
     }
 
-    public void setCin(int cin) {
+    public void setCin(String cin) {
         this.cin = cin;
     }
 
@@ -85,7 +88,7 @@ public class ClientP extends Client {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.ClientP[ code=" + getCode() + " ]"+getAdresse();
+        return "com.mind.ak47.begin.model.ClientP[ code=" + getCode() + " ]";
     }
     
 }

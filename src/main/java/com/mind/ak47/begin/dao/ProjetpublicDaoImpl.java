@@ -5,7 +5,10 @@
  */
 package com.mind.ak47.begin.dao;
 
-import com.mind.ak47.begin.model.ProjetPK;
+
+import static com.mind.ak47.begin.dao.ProjetpriveDaoImpl.logger;
+import com.mind.ak47.begin.model.Client;
+import com.mind.ak47.begin.model.ClientPublic;
 import com.mind.ak47.begin.model.Projetpublic;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -21,16 +24,19 @@ import org.springframework.stereotype.Repository;
  * @author ak47@minduos
  */
 @Repository("projetpublicDao")
-public class ProjetpublicDaoImpl extends AbstractDao<ProjetPK, Projetpublic> implements ProjetpublicDao{
+public class ProjetpublicDaoImpl extends AbstractDao<Integer, Projetpublic> implements ProjetpublicDao{
     
     
     static final Logger logger = LoggerFactory.getLogger(ProjetpublicDaoImpl.class);
-    public Projetpublic findById(int id,short ida) {
-                ProjetPK pk=new ProjetPK(ida, id);
-		Projetpublic projetpublic = getByKey(pk);
-                /*if(projetpublic!=null){
-			Hibernate.initialize(projetpublic.getCodeville());
-		}*/
+    public Projetpublic findById(int id) {
+                
+		Projetpublic projetpublic = getByKey(id);
+                if(projetpublic!=null){
+                    Client c=projetpublic.getCodeclient();
+                    ClientPublic ci=(ClientPublic)c;
+			Hibernate.initialize(ci);
+			
+		}
 		
 		return projetpublic;
 	}
@@ -43,15 +49,31 @@ public class ProjetpublicDaoImpl extends AbstractDao<ProjetPK, Projetpublic> imp
 		Projetpublic projetpublic = (Projetpublic)crit.uniqueResult();
 		delete(projetpublic);
 	}
+    public List<Projetpublic> findBypr(int p){
+                logger.info("codeprojet : {}", p);
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("codeclient.code", p));
+		List<Projetpublic> docs = (List<Projetpublic>)crit.list();
+		 /*for(Memoire doc : docs){
+			Hibernate.initialize(doc.getType());
+		}*/
+		return docs;
+        
+        }
     public List<Projetpublic> findAllProjetpublic() {
 		Criteria criteria = createEntityCriteria();
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
 		List<Projetpublic> projetpublics = (List<Projetpublic>) criteria.list();
 		
 		
-		/*for(Projetpublic projetpublic : projetpublics){
-			Hibernate.initialize(projetpublic.getCodeville());
-		}*/
+		for(Projetpublic projetpublic : projetpublics){
+			if(projetpublic!=null){
+                    Client c=projetpublic.getCodeclient();
+                    ClientPublic ci=(ClientPublic)c;
+			Hibernate.initialize(ci);
+			
+		}
+		}
 		return projetpublics;
 	}
     

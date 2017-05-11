@@ -20,16 +20,16 @@ import com.mind.ak47.begin.model.Client;
  *
  * @author ak47@minduos
  */
-@Repository("clientDao")
-public class ClientDaoImpl extends AbstractDao<Integer, Client> implements ClientDao{
+@Repository("ClientDao")
+public class ClientDaoImpl extends AbstractDao <Integer, Client> implements ClientDao{
      
     static final Logger logger = LoggerFactory.getLogger(ClientDaoImpl.class);
     
     public Client findById(int id) {
 		Client client = getByKey(id);
-                /*if(client!=null){
+                if(client!=null){
 			Hibernate.initialize(client.getCodeville());
-		}*/
+		}
 		
 		return client;
 	}
@@ -42,6 +42,7 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
 		Client client = (Client)crit.uniqueResult();
 		delete(client);
 	}
+    
     public List<Client> findAllClient() {
 		Criteria criteria = createEntityCriteria().addOrder(Order.asc("code"));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.

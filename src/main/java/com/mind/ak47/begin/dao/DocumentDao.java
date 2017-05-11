@@ -4,19 +4,24 @@
  * and open the template in the editor.
  */
 package com.mind.ak47.begin.dao;
+
 import com.mind.ak47.begin.model.Document;
+
 import java.util.List;
+
 /**
  *
  * @author ak47@minduos
  */
-public interface DocumentDao  {
-     Document findById(int annne);
+public interface DocumentDao {
+        Document findById(int id);
+	
+	List<Document> findBypr(int p);
 	
 	void save(Document document);
 	
 	void deleteById(int id);
 	
-	List<Document> findAllDocument();
+	List<Document> findAll();
     
 }

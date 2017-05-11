@@ -8,16 +8,19 @@ package com.mind.ak47.begin.model;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
@@ -28,43 +31,50 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Document implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected DocumentPK documentPK;
+    @Id
+    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
+    private Integer code;
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
-    
-    /*@JoinColumn(name = "code", referencedColumnName = "code", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Projet projet;*/
-     @MapsId("documentPK")
-    @JoinColumns({
-        @JoinColumn(name="annee", referencedColumnName="annee"),
-        @JoinColumn(name="code", referencedColumnName="code")
-    })
-    @ManyToOne
-    public Projet projet;
-    
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "path")
+    private String path;
+    @Basic(optional = false)
+    @Column(name = "ext")
+    private String ext;
+    @Basic(optional = false)
+    @Column(name = "num")
+    private int num;
+    @JoinColumn(name = "type", referencedColumnName = "code")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Typedoc type;
+    @JoinColumn(name = "codeprojet", referencedColumnName = "code")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Projet codeprojet;
+
 
     public Document() {
     }
 
-    public Document(DocumentPK documentPK) {
-        this.documentPK = documentPK;
+    public Document(Integer code) {
+        this.code = code;
     }
 
-    public Document(DocumentPK documentPK, String description) {
-        this.documentPK = documentPK;
+    public Document(Integer code, String description) {
+        this.code = code;
         this.description = description;
     }
 
-
-    public DocumentPK getDocumentPK() {
-        return documentPK;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setDocumentPK(DocumentPK documentPK) {
-        this.documentPK = documentPK;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -75,19 +85,18 @@ public class Document implements Serializable {
         this.description = description;
     }
 
-    /*public Projet getProjet() {
-        return projet;
+    public Projet getProjet() {
+        return codeprojet;
     }
 
     public void setProjet(Projet projet) {
-        this.projet = projet;
-    }*/
+        this.codeprojet = projet;
+    }
 
-    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (documentPK != null ? documentPK.hashCode() : 0);
+        hash += (code != null ? code.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +107,7 @@ public class Document implements Serializable {
             return false;
         }
         Document other = (Document) object;
-        if ((this.documentPK == null && other.documentPK != null) || (this.documentPK != null && !this.documentPK.equals(other.documentPK))) {
+        if ((this.code == null && other.code != null) || (this.code != null && !this.code.equals(other.code))) {
             return false;
         }
         return true;
@@ -106,7 +115,47 @@ public class Document implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mind.ak47.begin.model.Document[ documentPK=" + documentPK + " ]";
+        return "com.mind.ak47.begin.model.Document[ code=" + code + " ]";
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getExt() {
+        return ext;
+    }
+
+    public void setExt(String ext) {
+        this.ext = ext;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public Typedoc getType() {
+        return type;
+    }
+
+    public void setType(Typedoc type) {
+        this.type = type;
+    }
+
+    public Projet getCodeprojet() {
+        return codeprojet;
+    }
+
+    public void setCodeprojet(Projet codeprojet) {
+        this.codeprojet = codeprojet;
     }
     
 }

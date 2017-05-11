@@ -54,8 +54,22 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/upp-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/supp-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewp-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/upp-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block">Modifier</a> <a href="<c:url value='/supp-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger-${client.getCode()}">Supprimer</a></td>
                                             </tr>
+                                            <div class="message-box message-box-danger animated fadeIn" id="message-box-danger-${client.getCode()}">
+                                            <div class="mb-container">
+                                                <div class="mb-middle">
+                                                <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
+                                                <div class="mb-content">
+                                                    <p>Vous allez supprimer le client définitivement. Continuez ?</p>
+                                                </div>
+                                                    <div class="mb-footer">
+                                                        <a href="<c:url value='/supp-client-${client.getCode()}' />" class="btn btn-success btn-lg">Oui</a>
+                                                        <button class="btn btn-default btn-lg mb-control-close">Non</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                                 </c:forEach>
                                                 </c:if>
                                             <c:if test="${not empty clp}" >
@@ -67,8 +81,22 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/viewpu-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/suppu-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger">Supprimer</a></td>
+                                                <td><a href="<c:url value='/viewpu-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/uppu-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/suppu-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger-${client.getCode()}">Supprimer</a></td>
                                             </tr>
+                                            <div class="message-box message-box-danger animated fadeIn" id="message-box-danger-${client.getCode()}">
+                                            <div class="mb-container">
+                                                <div class="mb-middle">
+                                                <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
+                                                <div class="mb-content">
+                                                    <p>Vous allez supprimer le client définitivement. Continuez ?</p>
+                                                </div>
+                                                    <div class="mb-footer">
+                                                        <a href="<c:url value='/suppu-client-${client.getCode()}' />" class="btn btn-success btn-lg">Oui</a>
+                                                        <button class="btn btn-default btn-lg mb-control-close">Non</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                                 </c:forEach>
                                                 </c:if>
                                             <c:if test="${not empty cls}" >
@@ -80,8 +108,22 @@
 						<td>${client.getAdresse()}</td>
 						<td>${client.getMail()}</td>
 						<td>${client.getCodeville().getDescription()}</td>
-                                                <td><a href="<c:url value='/views-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/ups-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/sups-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger">Supprimer</a></td>
+                                                <td><a href="<c:url value='/views-client-${client.getCode()}' />" class="btn btn-success btn-sm btn-block">Consulter</a> <a href="<c:url value='/ups-client-${client.getCode()}' />" class="btn btn-warning btn-sm btn-block"> Modifier</a> <a href="<c:url value='/sups-client-${client.getCode()}' />" class="btn btn-danger mb-control btn-sm btn-block" data-box="#message-box-danger-${client.getCode()}">Supprimer</a></td>
                                             </tr>
+                                            <div class="message-box message-box-danger animated fadeIn" id="message-box-danger-${client.getCode()}">
+                                            <div class="mb-container">
+                                                <div class="mb-middle">
+                                                <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
+                                                <div class="mb-content">
+                                                    <p>Vous allez supprimer le client définitivement. Continuez ?</p>
+                                                </div>
+                                                    <div class="mb-footer">
+                                                        <a href="<c:url value='/sups-client-${client.getCode()}' />" class="btn btn-success btn-lg">Oui</a>
+                                                        <button class="btn btn-default btn-lg mb-control-close">Non</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                                 </c:forEach>
                                                 </c:if>
                                             </tbody>
@@ -90,7 +132,7 @@
                                 </div>
                             </div>
                             <!-- END DEFAULT DATATABLE -->
-
+                           
                           
 
                         </div>
@@ -98,22 +140,17 @@
                     
                     <div class="row">
                         
-                        <center><button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Public</button> <button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Privé</button> <button class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Societé</button></center>
-                        
+                        <center><a href="<c:url value='/addpu-client' />" class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Public</a> <a href="<c:url value='/addp-client' />" class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Privé</a> <a href="<c:url value='/adds-client' />" class="btn btn-info btn-group-lg active" type="button">Ajouter Nouveau Client Societé</a></center>
+                        <center><a href="<c:url value='/impclients' />" class="btn btn-primary btn-group-lg active" type="button">imp</a></center>
                     </div>
-                    <div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
-            <div class="mb-container">
-                <div class="mb-middle">
-                    <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
-                    <div class="mb-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
-                    </div>
-                    <div class="mb-footer">
-                        <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    
                 </div>
                 
 <%@include file="dashf.jsp" %>
+<c:if test="${param.opf != null}">
+                               <script>noty({text: 'suppression n''est pas valide, layout: 'topCenter'});</script>
+							</c:if>
+                               <c:if test="${param.supp != null}">
+                               <script>noty({text: 'suppression confirmée', layout: 'topCenter'});</script>
+							</c:if>
+<%@include file="dashfe.jsp" %>
